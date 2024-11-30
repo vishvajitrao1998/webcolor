@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+
+    {% block meta_tag %}
+
+    {% endblock %}
+
+    <title>
+
+        {% block titlename %}
+        {% endblock %}
+
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=66936679e1507500197b016e&product=sop' async='async'></script>
+    <link rel="stylesheet" href="{% static 'colors/css/bootstrap_5.3.3/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'colors/css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'colors/images/icons/favicon.png' %}">    
+</head>
+
+<body>
+
+
+    {% include 'navbar.html' %}
+    {% block content %}
+
+    {% block breadcrumb %}
+
+    {% endblock %}
+
+
+    {% endblock %}
+    {% include 'footer.html' %}
+    <script src="{% static 'colors/js/main.js' %}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+    <script src="{% static 'colors/js/bootstrap_5.3.3/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'colors/js/bootstrap_5.3.3/proper.min.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titlename %}
+SnappyURL - A Popular Online URL Shortener
+{% endblock %}
+
+{% block meta_tag %}
+<meta name="title" content="SnappyURL - A Popular Online URL Shortener">
+<meta name="keywords"
+    content="URL shortener, shorten URLs, link shortener, free URL shortener, create short links, unshorten URL, link tracking, short URL statistics, QR code generator, custom short URLs, URL shortening service, link management, analytics for short links, online URL shortener, shareable links">
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 heading-section mt-3">
+            <h1 class="generic-heading mt-5 text-center">
+                Unlock Colors, Unleash Creativity
+            </h1>
+            <p class="text-center generic-para">Discover, Extract, Create</p>
+        </div>
+        <div class="col-md-8">
+            <div class="image-section">
+                <div class="upload-container" id="upload-container">
+                    <h2>Drag & Drop Your Image Here</h2>
+                    <p>or click to Choose File button</p>
+
+                    <!-- Drag & Drop Zone -->
+                    <div class="upload-zone" id="upload-zone">
+                        <span>Drag & Drop Image Here</span>
+                        <input type="file" id="fileInput" accept="image/*">
+                    </div>
+                </div>
+                <!-- Image preview container -->
+                <div id="imagePreview" style="margin-top: 20px; display: none; width: 100%; height:100%;">
+                    <img id="previewImg" src="" alt="Uploaded Image" class="img-fluid"
+                        style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="color-codes">
+                <div class="color-header">
+                    <div class="color1"></div>
+                    <div class="color2"></div>
+                    <div class="color3"></div>
+                </div>
+                <hr class="mt-5">
+                <div class="hex-code d-flex p-4 justify-content-between aligh-item-center">
+                    <div class="color-code d-flex justify-content-between">
+                        <div class="hex">
+                            HEX
+                        </div>
+                        <div class="hex-value ms-3 mx-auto" id="hex-code">
+                            #37AFE1
+                        </div>
+                    </div>
+                    <div class="copyclicpboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-copy" viewBox="0 0 16 16" onclick="copyToClipboard('hex-code')">
+                            <path fill-rule="evenodd"
+                                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="hex-code d-flex p-4 justify-content-between aligh-item-center mt-4">
+                    <div class="color-code d-flex justify-content-between">
+                        <div class="hex">
+                            RGB
+                        </div>
+                        <div class="hex-value ms-3" id="rgb-code">
+                            #rgb(37, 150, 190)
+                        </div>
+                    </div>
+                    <div class="copyclicpboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-copy" viewBox="0 0 16 16" onclick="copyToClipboard('rgb-code')">
+                            <path fill-rule="evenodd"
+                                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="hex-code d-flex p-4 justify-content-between aligh-item-center mt-4">
+                    <div class="color-code d-flex justify-content-between">
+                        <div class="hex">
+                            HSL
+                        </div>
+                        <div class="hex-value ms-3" id="hsl-code">
+                            rgb(37, 150, 190)
+                        </div>
+                    </div>
+                    <div class="copyclicpboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-copy" viewBox="0 0 16 16" onclick="copyToClipboard('hsl-code')">
+                            <path fill-rule="evenodd"
+                                d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="d-lg-flex mt-5 justify-content-center aligh-item-center">
+                    <div class="file-upload">
+                        <input type="file" id="fileInput" accept="image/*">
+                        <label for="fileInput">📂 Choose File</label>
+                    </div>
+                    <div class="file-upload ms-lg-3">
+                        <label for="file-input">🖊️ Color Picker</label>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2 mt-5">
+            <div class="color-palette-section mb-5">
+                <div class="colors-group">
+                    <img src="{% static 'colors/images/colors.svg' %}" alt="" class="">
+                </div>
+                <div class="color-header">
+                    <div class="color1"></div>
+                    <div class="color2"></div>
+                    <div class="color3"></div>
+                </div>
+                <h2 class="text-start mt-3">Explore Our Color Palette</h2>
+                <p class="text-start">Browse through this collection of modern colors for your next project.</p>
+                <div class="color-palette mt-5">
+                    <!-- Color Block 1 -->
+                    <div class="color-block color-1"></div>
+                    <!-- Color Block 2 -->
+                    <div class="color-block color-2"></div>
+                    <!-- Color Block 3 -->
+                    <div class="color-block color-3"></div>
+                    <!-- Color Block 4 -->
+                    <div class="color-block color-4"></div>
+                    <!-- Color Block 5 -->
+                    <div class="color-block color-5"></div>
+                    <!-- Color Block 6 -->
+                    <div class="color-block color-6"></div>
+                    <!-- Color Block 7 -->
+                    <div class="color-block color-7"></div>
+                    <!-- Color Block 8 -->
+                    <div class="color-block color-8"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap Modal -->
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="copyModal" tabindex="-1" aria-labelledby="copyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="copyModalLabel">Color Code Copied</h5><span class="mt-1 ms-1"> 🙂</span>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    The color code has been successfully copied to your clipboard!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn gradient-btn" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Close -->
+
+    <!-- Code for Other content -->
+    <hr>
+
+
+</div>
+
+{% endblock %}
