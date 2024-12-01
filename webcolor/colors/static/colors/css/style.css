@@ -276,6 +276,10 @@ body {
     color: var(--sixth-color);
 }
 
+.color-palette-section>.color-header>.color3 {
+    background-color: #f1c40f;
+}
+
 
 .colors-group {
     top: var(--colors-code);
@@ -289,9 +293,12 @@ body {
     display: grid;
     column-gap: 10px;
     row-gap: 20px;
-    grid-template-columns: repeat(8, 80px); /* Flexible grid columns */
-    justify-content: center; /* Centering items horizontally within grid cells */
-    align-items: center; /* Centering items vertically within grid cells */
+    grid-template-columns: repeat(8, 80px);
+    /* Flexible grid columns */
+    justify-content: center;
+    /* Centering items horizontally within grid cells */
+    align-items: center;
+    /* Centering items vertically within grid cells */
 
 }
 
@@ -299,14 +306,16 @@ body {
 /* Media Query for Medium Screens (tablets) */
 @media (max-width: 768px) {
     .color-palette {
-        grid-template-columns: repeat(4, 1fr); /* 4 columns for medium screens */
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 columns for medium screens */
     }
 }
 
 /* Media Query for Mobile Screens */
 @media (max-width: 480px) {
     .color-palette {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile screens */
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 columns for mobile screens */
     }
 }
 
@@ -317,17 +326,22 @@ body {
     background-color: #ccc;
     border-radius: 10px;
     cursor: var(--cursor);
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease-in, color 0.4s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Color block hover effect */
 .color-block:hover {
-    transform: scale(1.05);
+    transform: scale(1.5);
+    color: var(--first-color);
 }
 
 /* Optional: Add unique color backgrounds to each block */
 .color-1 {
     background-color: #FF5733;
+    color: #FF5733;
 }
 
 .color-2 {
@@ -395,17 +409,198 @@ body {
 
 }
 
+.color-palette-container {
+    height: auto;
+    background-color: var(--first-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
+.color-palette-content {
+    max-width: 80%;
+    text-align: center;
+    margin-top: 50px;
+}
 
+.color-palette-content h2 {
+    background-image: var(--bg-image);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    font-size: 45px;
+    margin-bottom: 20px;
+}
 
+.color-palette-content p {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+.color-palette-content p::first-letter {
+    font-size: 30px;
+}
+
+::selection {
+    color: red;
+    /* Text color of the selected text */
+}
 
 .navbar-custom-style {
-    background-color: white;
-    border-bottom: 2px solid #0e0a19;
+    background-color: var(--first-color);
+    /* border-bottom: var(--first-color); */
+
 
 }
 
+.color-palette-category {
+    display: grid;
+    row-gap: 36px;
+    column-gap: 50px;
+    grid-template-columns: repeat(5, minmax(60px, 1fr));
+    justify-content: center;
+    color: var(--sixth-color);
+}
+
+.category-name {
+    display: flex;
+    background-color: var(--sixth-color);
+    height: 50px;
+    width: 90px;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    cursor: var(--cursor);
+    box-shadow: 0 0 5px 5px var(--fourth-color);
+    background-color: var(--first-color);
+    color: white;
+
+}
+
+
+/* Media Query for Medium Screens (tablets) */
+@media (max-width: 768px) {
+    .color-palette-category {
+        grid-template-columns: repeat(4, minmax(40px, 1fr));
+        /* 4 columns for medium screens */
+        row-gap: 5px;
+        column-gap: 20px;
+    }
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 480px) {
+    .color-palette-category {
+        grid-template-columns: repeat(2, minmax(40px, 1fr));
+        /* 2 columns for mobile screens */
+    }
+}
+
 /* Closing */
+
+
+.glow-button {
+    padding: 15px 30px;
+    font-size: var(--fourth-color);
+    color: white;
+    background-color: var(--fourth-color);
+    border: none;
+    border-radius: var(--border-radius-second);
+    cursor: var(--cursor);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-top: 70px;
+    font-weight: var(--font-weight);
+}
+
+.glow-button:focus {
+    outline: none;
+}
+
+.glow-button:hover {
+    box-shadow: 0 0 15px 5px var(--fourth-color);
+    /* Green glow */
+    transform: scale(1.1);
+}
+
+.glow-button:active {
+    box-shadow: 0 0 25px 10px var(--fourth-color);
+    /* Stronger glow when clicked */
+    transform: scale(0.95);
+}
+
+
+/* .hextorgb-container {
+    height: auto;
+    background-color: var(--first-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+} */
+
+.hextorgb-container {
+    background-image: url('https://images.pexels.com/photos/24259646/pexels-photo-24259646/free-photo-of-colorful-shape-of-dots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');  /* Replace with your image URL */
+    background-size: cover;  /* Makes sure the image covers the entire container */
+    background-position: center center;  /* Centers the image in the container */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    padding: 20px;  /* Adjust the padding as needed */
+    color: white;  /* Optional: Change text color to white for better contrast with the background */
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    opacity: 1;
+}
+
+.hextorgb-content h2 {
+    background-image: var(--bg-image);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    font-size: 45px;
+    margin-bottom: 20px;
+    text-align: var(--justify-centent);
+}
+
+.hextorgb-content p {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+
+
+
+
+.hextorgb-button {
+    padding: 15px 30px;
+    font-size: var(--fourth-color);
+    color: white;
+    /* background-color: var(--fourth-color); */
+    background: var(--bg-image);
+    border: none;
+    border-radius: var(--border-radius-second);
+    cursor: var(--cursor);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-top: 70px;
+    font-weight: var(--font-weight);
+}
+
+
 
 
 /* CSS for Footer section */
@@ -418,14 +613,20 @@ body {
 
 }
 
+.brandName {
+    background-image: var(--bg-image);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
 
 
 
 .navbar-nav .nav-item {
     text-align: left;
-    background-color: #244855;
+    /* background-color: #244855; */
     color: black;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 /* Custom CSS for managing in small devices*/
@@ -439,10 +640,10 @@ body {
         margin-left: 5px;
     }
 
-    .navbar-nav .nav-item {
+    /* .navbar-nav .nav-item {
         border-top: 1px solid #ccc;
         text-align: left;
-    }
+    } */
 
     .navbar-nav .nav-item:hover {
         text-align: left;
@@ -540,8 +741,10 @@ body {
 
 .footer-heading {
     font-size: 25px;
-    color: #777987;
-    /* color: #244855; */
+    background-image: var(--bg-image);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
 }
 
 .footer-heading-two {
