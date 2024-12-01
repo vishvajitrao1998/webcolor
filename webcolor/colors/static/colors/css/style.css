@@ -1,13 +1,32 @@
-
-
-
 :root {
-    --main-bg-color: #0B192C;
-    --heading-color: #FF6500;
+    --first-color: #0B192C;
+    --second-color: #000000;
+    --third-color: #1E3E62;
+    --fourth-color: #14de39;
+    --fifth-color: #FF6500;
+    --sixth-color: white;
     --body-min-height: 100vh;
+    --font-size-first: 24px;
+    --font-size-second: 16px;
+    --font-weight: bold;
+    --bg-image: linear-gradient(to right, var(--fifth-color), var(--fourth-color));
+    --colors-code: -80px;
+    --heading-first: 55px;
+    --heading-second: 40px;
+    --main-section-height: 350px;
+    --border-radius: 15px;
+    --border-radius-second: 8px;
+    --image-section-height: 600px;
+    --image-section-color-point-size: 15px;
+    --border: 2px solid grey;
+    --box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+    --padding: 40px;
+    --justify-centent: center;
+    --aligh-items: center;
+    --cursor: pointer;
+
+
 }
-
-
 
 
 
@@ -33,18 +52,352 @@ body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 64px;
     font-weight: 600;
-    /* text-shadow: 1px 1px #244855; */
-    background-image: linear-gradient(to right, #e64833,#244855, #e64833);
+    background-image: var(--bg-image);
     -webkit-background-clip: text;
-    /* Clip the background to the text */
     color: transparent;
 }
 
 .heading-section {
-    background-color: var(--main-bg-color);
-    min-height: 100vh;
+    background-color: var(--first-color);
+    height: var(--main-section-height);
+    border-radius: 8px;
 
 }
+
+.generic-para {
+    color: var(--fifth-color);
+}
+
+
+.image-section {
+    height: var(--image-section-height);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    transform: translateY(-20%);
+    background-color: var(--sixth-color);
+    display: flex;
+    justify-content: var(--justify-centent);
+    align-items: var(--aligh-items);
+    padding: var(--padding);
+}
+
+.color-codes {
+    height: var(--image-section-height);
+    box-shadow: var(--box-shadow);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    transform: translateY(-20%);
+    position: relative;
+    background-color: var(--sixth-color);
+    padding: var(--padding);
+
+}
+
+.color-header {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 3px;
+}
+
+.color1 {
+    height: var(--image-section-color-point-size);
+    width: var(--image-section-color-point-size);
+    border-radius: 50%;
+    background-color: var(--fifth-color);
+}
+
+
+.color2 {
+    height: var(--image-section-color-point-size);
+    width: var(--image-section-color-point-size);
+    border-radius: 50%;
+    background-color: var(--fourth-color);
+
+}
+
+.color3 {
+    height: var(--image-section-color-point-size);
+    width: var(--image-section-color-point-size);
+    border-radius: 50%;
+    background-color: var(--third-color);
+
+}
+
+.hex-code {
+
+    --border-radius: 5px;
+    border-radius: var(--border-radius);
+    border: 1px dashed var(--fifth-color);
+}
+
+.copyclicpboard {
+    color: var(--first-color);
+    cursor: var(--cursor);
+}
+
+
+/* Hide the input elements but keep the labels visible and clickable */
+.file-upload input[type="file"],
+.file-upload input[type="color"] {
+    display: none;
+    /* This will hide the inputs */
+}
+
+/* Optional: Style the labels to make them more prominent if needed */
+.file-upload label {
+    cursor: var(--cursor);
+    /* Make the label clickable */
+    display: inline-block;
+    padding: 10px;
+    background-color: var(--fourth-color);
+    /* Add background color for better visibility */
+    border-radius: 5px;
+    /* Optional: adds rounded corners to the label */
+    transition: background-color 0.3s ease;
+    /* Optional: smooth transition for background */
+}
+
+.file-upload label:hover {
+    background-color: var(--fourth-color);
+    /* Change background color on hover */
+}
+
+
+/* General container styling */
+.upload-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 100px;
+    text-align: center;
+    background-color: #fff;
+    border: 2px dashed var(--second-color);
+    border-radius: var(--border-radius-second);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Title and instruction text */
+.upload-container h2 {
+    font-size: var(--font-size-first);
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.upload-container p {
+    font-size: var(--font-size-second);
+    color: #555;
+    margin-bottom: 20px;
+}
+
+#imagePreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#imagePreview img {
+    max-height: 550px;
+}
+
+
+/* Styling the drag-and-drop zone */
+.upload-zone {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    border-radius: var(--border-radius-second, 12px);
+    border: 2px solid transparent;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: var(--justify-content, center);
+    align-items: var(--align-items, center);
+    color: #4CAF50;
+    font-size: 18px;
+    cursor: var(--cursor);
+    border-left-color: var(--fifth-color);
+    border-top-color: var(--fourth-color);
+    border-right-color: var(--second-color);
+    border-bottom-color: var(--fifth-color);
+    transition: background-color 0.3s ease;
+}
+
+
+.upload-zone:hover {
+    background-color: #e8f5e8;
+    /* Light green on hover */
+}
+
+.upload-zone input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: var(--cursor);
+}
+
+/* Optional: Styling for the text inside the drop area */
+.upload-zone span {
+    font-size: var(--font-size-second);
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Optional: Optional text when file is being dragged */
+.upload-zone.dragover {
+    background-color: #e0f7e0;
+    /* Light green when dragging over */
+}
+
+
+.color-palette-section {
+    background-color: var(--first-color);
+    border-radius: var(--border-radius-second);
+    position: relative;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+.color-palette-section h2 {
+    background-image: var(--bg-image);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: var(--font-weight);
+}
+
+.color-palette-section p {
+    color: var(--sixth-color);
+}
+
+
+.colors-group {
+    top: var(--colors-code);
+    right: var(--colors-code);
+    position: absolute;
+}
+
+
+/* Color blocks layout */
+.color-palette {
+    display: grid;
+    column-gap: 10px;
+    row-gap: 20px;
+    grid-template-columns: repeat(8, 80px); /* Flexible grid columns */
+    justify-content: center; /* Centering items horizontally within grid cells */
+    align-items: center; /* Centering items vertically within grid cells */
+
+}
+
+
+/* Media Query for Medium Screens (tablets) */
+@media (max-width: 768px) {
+    .color-palette {
+        grid-template-columns: repeat(4, 1fr); /* 4 columns for medium screens */
+    }
+}
+
+/* Media Query for Mobile Screens */
+@media (max-width: 480px) {
+    .color-palette {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile screens */
+    }
+}
+
+/* Color Block Styling */
+.color-block {
+    height: 80px;
+    width: 80px;
+    background-color: #ccc;
+    border-radius: 10px;
+    cursor: var(--cursor);
+    transition: transform 0.3s ease;
+}
+
+/* Color block hover effect */
+.color-block:hover {
+    transform: scale(1.05);
+}
+
+/* Optional: Add unique color backgrounds to each block */
+.color-1 {
+    background-color: #FF5733;
+}
+
+.color-2 {
+    background-color: #33FF57;
+}
+
+.color-3 {
+    background-color: #3357FF;
+}
+
+.color-4 {
+    background-color: #F1C40F;
+}
+
+.color-5 {
+    background-color: #9B59B6;
+}
+
+.color-6 {
+    background-color: #1ABC9C;
+}
+
+.color-7 {
+    background-color: #E74C3C;
+}
+
+.color-8 {
+    background-color: #3498DB;
+}
+
+
+
+#copyModalLabel {
+    background-image: var(--bg-image);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: var(--font-weight);
+}
+
+
+.generic-button {
+    --border-radius: 5px;
+    padding: 15px 30px;
+    font-size: var(--font-size-second);
+    background-color: var(--fourth-color);
+    border: none;
+    border-radius: var(--border-radius);
+    text-align: center;
+    text-decoration: none;
+    color: white;
+
+}
+
+
+.generic-button:hover {
+    --border-radius: 5px;
+    padding: 15px 30px;
+    font-size: var(--font-size-second);
+    background-color: var(--first-color);
+    border: none;
+    border-radius: var(--border-radius);
+    text-align: center;
+    text-decoration: none;
+    color: white;
+
+}
+
+
+
+
 
 .navbar-custom-style {
     background-color: white;
@@ -59,175 +412,14 @@ body {
 .footer {
     margin-top: auto;
     width: 100%;
-    background-color: #0f1013;
+    background-color: var(--first-color);
     color: white;
-    /* text-align: center; */
-
-}
-
-.modern-input {
-    width: 100%;
-    padding: 18px;
-    border: 1px solid #e64833;
-    border-radius: 5px;
-    /* box-shadow: 0 3px 7px grey; */
-    transition: box-shadow 0.3s ease;
-}
-
-.modern-input:focus {
-    width: 100%;
-    padding: 18px;
-    border: 1px solid #244855;
-    border-radius: 5px;
-    /* box-shadow: 0 3px 7px grey; */
-}
-
-.image-container {
-    display: flex;
-    justify-content: center;
-    /* Center horizontally */
-    align-items: center;
-    /* Center vertically */
-    height: 100%;
-    /* Ensure full height of column */
-}
-
-
-
-@media only screen and (min-width: 992px) {
-    .navbar {
-        height: 60px !important;
-    }
-}
-
-.about-section {
-    background-color: #244855;
-    border-radius: 3px;
-    color: white;
-    box-shadow: 0 2px 5px grey;
-    padding-top: 10px;
-}
-
-.modern-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 20px;
-    color: white;
-    background-color: #244855;
-    /* Primary color */
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.modern-button:hover {
-    /*  background-color: #0056b3; Darker shade on hover */
-    background-color: #e64833;
-    /* Darker shade on hover */
-    transform: translateY(-2px);
-    /* Slight lift effect */
-}
-
-.modern-button:active {
-    transform: translateY(1px);
-    /* Slight push effect */
-}
-
-
-.generic-button {
-    padding: 15px 30px;
-    font-size: 20px;
-    background-color: #244855;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    color: white;
+    position: relative;
 
 }
 
 
-.generic-button:hover {
-    padding: 15px 30px;
-    font-size: 20px;
-    background-color: #e64833;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    text-decoration: none;
-    color: white;
 
-}
-
-
-.gtinTouch {
-    border: 2px solid #e64833;
-    border-radius: 5px;
-}
-
-
-.generic-section {
-    height: 300px;
-    /* Optional: Ensures full height for vertical centering */
-    display: flex;
-    /* justify-content: center; */
-    /* Center horizontally */
-    align-items: center;
-    /* Center vertically */
-    text-align: center;
-    /* Center text */
-}
-
-
-/* CSS for contact secion in home page */
-.contact {
-
-    /* font-weight: bold; */
-    color: black;
-    font-family: poppins;
-    font-size: 20px;
-    width: 60%;
-    line-height: 1.6;
-
-}
-
-/* Closing */
-
-/* CSS for advantages section */
-.advantage-section {
-    height: auto;
-    box-shadow: 0 4px 5px grey;
-    border-radius: 5px;
-}
-
-/* Closing */
-
-
-/* CSS for  how-to-section section */
-.how-to-section {
-    height: auto;
-    background-color: #fffdf8;
-
-}
-
-/* Closing */
-
-.generic-para {
-
-    font-weight: bold;
-    color: #244855;
-}
-
-/* CSS for faq */
-.faq-heading {
-
-    font-weight: bold;
-    font-family: "Source Sans 3", sans-serif;
-}
-
-/* Close */
 
 .navbar-nav .nav-item {
     text-align: left;
@@ -263,25 +455,6 @@ body {
 
     }
 
-    .tool-section {
-        height: auto;
-        background-color: #fffdf8;
-        /* background-image: linear-gradient(#a33acc, #0e0a19); */
-    }
-
-    .how-to-section {
-        height: 100%;
-        background-color: #fffdf8;
-        margin-bottom: 30px;
-    }
-
-    .about-section {
-        background-color: #244855;
-        border-radius: 3px;
-        color: white;
-        box-shadow: 0 2px 5px grey;
-        padding-top: 30px;
-    }
 
 }
 
@@ -316,74 +489,6 @@ body {
 
 /* Close */
 
-/* Css for short url card */
-.short-url-card {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.short-url-card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.url-display {
-    font-weight: 500;
-    color: #333;
-    word-break: break-all;
-}
-
-.short-url {
-    font-weight: 600;
-    color: #007bff;
-}
-
-.btn-group {
-    margin-top: 10px;
-}
-
-.copy-btn,
-.share-btn {
-    width: 45%;
-}
-
-/* Custom copy button feedback */
-.copy-feedback {
-    display: none;
-    margin-top: 5px;
-    color: green;
-    font-weight: bold;
-}
-
-/* Social media icons styling */
-.social-icons a {
-    font-size: 24px;
-    margin: 0 10px;
-    text-decoration: none;
-}
-
-/* Close */
-
-
-.qr-code {
-    display: flex;
-    justify-content: center;
-    /* Center horizontally */
-    align-items: center;
-    /* Center vertically */
-    width: 100%;
-    /* Full width */
-    height: 200px;
-    /* Set height for centering */
-    border: 1px solid #ddd;
-    /* Optional border for the QR code container */
-    border-radius: 8px;
-    /* Optional rounded corners */
-    background-color: #fff;
-    /* Optional background color */
-
-}
 
 /* Footer social links */
 
@@ -405,7 +510,7 @@ body {
     /* Change color on hover */
 }
 
-.footer-contact  {
+.footer-contact {
     background-color: #fffdf8;
     border-radius: 5px;
     display: flex;
@@ -417,20 +522,22 @@ body {
     padding: 20px;
 }
 
-.footer-contact a:hover  {
+.footer-contact a:hover {
     color: #244855;
 }
 
-.list-unstyled li a{
+.list-unstyled li a {
     color: #777987;
     font-weight: bold;
 
 }
-.list-unstyled li a:hover{
+
+.list-unstyled li a:hover {
     color: #e64833;
     font-weight: bold;
-    
+
 }
+
 .footer-heading {
     font-size: 25px;
     color: #777987;
@@ -440,139 +547,3 @@ body {
 .footer-heading-two {
     font-size: 25px;
 }
-
-.why-use-tool {
-    background-color: #f8f9fa; /* Light background for contrast */
-}
-.card {
-    border: none; /* Remove default card border */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
-}
-.card-title {
-    font-weight: bold; /* Make titles bold */
-}
-
-
-.who-can-use-tool {
-    background: linear-gradient(70deg, #244855, #e64833); /* Gradient background */
-    /* padding: 50px 0; */
-}
-.card {
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent card background */
-    transition: transform 0.3s; /* Smooth transform effect */
-}
-.card:hover {
-    transform: translateY(-5px); /* Lift effect on hover */
-}
-.card-title {
-    font-weight: bold; /* Make titles bold */
-}
-
-/* Breadcrump Section CSS */
-.breadcrumb-section {
-    background: linear-gradient(90deg,#244855, #e64833); /* Gradient background */
-    padding: 20px 0;
-    border-radius: 5px; /* Rounded corners */
-}
-.breadcrumb {
-    background: none; /* Remove default background */
-    margin-bottom: 0; /* Remove default margin */
-}
-.breadcrumb-item a {
-    color: #fff; /* White color for links */
-    text-decoration: none; /* Remove underline */
-}
-.breadcrumb-item a:hover {
-    text-decoration: underline; /* Underline on hover */
-}
-.breadcrumb-item.active {
-    color: rgba(255, 255, 255, 0.7); /* Lighter color for the current page */
-}
-
-/* Blog Content */
-
-.blog-section {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-.blog-title {
-    color: #343a40;
-    font-weight: 600;
-    font-size: 26px;
-}
-.blog-content {
-    color: #6c757d;
-    margin-top: 20px;
-}
-.blog-button {
-    margin-top: 20px;
-    background-color: #007bff;
-    color: #ffffff;
-}
-.blog-button:hover {
-    background-color: #0056b3;
-}
-
-/* Close */
-
-/* Side tool section */
-.tool-card {
-    border-radius: 8px;
-    transition: transform 0.2s;
-}
-.tool-card:hover {
-    transform: scale(1.05);
-}
-.btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-}
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #004085;
-}
-
-
-/*  Slider */
-
-/* .slider-section{
-    background-color: #fffdf8;
-    padding-bottom: 20px;
-} */
-
-.card-slider {
-    margin: 15px;
-    border: none;
-    border-radius: 15px;
-    transition: transform 0.3s;
-}
-.card-slider:hover {
-    transform: scale(1.03);
-}
-.card-img-top {
-    border-radius: 15px 15px 0 0;
-}
-.card-body-slider {
-    background-color: #ffffff;
-    border-radius: 0 0 15px 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-.btn-primary {
-    background-color: #6f42c1;
-    border: none;
-}
-.btn-primary:hover {
-    background-color: #5a31a1;
-}
-
-
-/* FAQ */
-
-/* .accordion-button {
-    background-color: #244855;
-    color: white;
-} */
-
-

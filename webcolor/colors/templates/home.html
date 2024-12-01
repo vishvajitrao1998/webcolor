@@ -24,8 +24,7 @@ SnappyURL - A Popular Online URL Shortener
             <div class="image-section">
                 <div class="upload-container" id="upload-container">
                     <h2>Drag & Drop Your Image Here</h2>
-                    <p>or click to Choose File button</p>
-
+                    <p>or click on Choose File button</p>
                     <!-- Drag & Drop Zone -->
                     <div class="upload-zone" id="upload-zone">
                         <span>Drag & Drop Image Here</span>
@@ -33,9 +32,9 @@ SnappyURL - A Popular Online URL Shortener
                     </div>
                 </div>
                 <!-- Image preview container -->
-                <div id="imagePreview" style="margin-top: 20px; display: none; width: 100%; height:100%;">
+                <div id="imagePreview" style="display: none;">
                     <img id="previewImg" src="" alt="Uploaded Image" class="img-fluid"
-                        style="width: 100%; height: 100%; object-fit: contain;">
+                       >
                 </div>
             </div>
         </div>
@@ -46,7 +45,7 @@ SnappyURL - A Popular Online URL Shortener
                     <div class="color2"></div>
                     <div class="color3"></div>
                 </div>
-                <hr class="mt-5">
+                <hr class="mt-3 mb-5">
                 <div class="hex-code d-flex p-4 justify-content-between aligh-item-center">
                     <div class="color-code d-flex justify-content-between">
                         <div class="hex">
@@ -111,22 +110,25 @@ SnappyURL - A Popular Online URL Shortener
 
             </div>
         </div>
+
+
+
     </div>
 
     <div class="row">
-        <div class="col-md-8 offset-md-2 mt-5">
-            <div class="color-palette-section mb-5">
+        <div class="col-md-10 offset-md-1 mt-2">
+            <div class="color-palette-section mb-5 text-center py-4">
                 <div class="colors-group">
-                    <img src="{% static 'colors/images/colors.svg' %}" alt="" class="">
+                    <img src="{% static 'colors/images/colors.svg' %}" alt="" class="d-none d-md-block">
                 </div>
                 <div class="color-header">
                     <div class="color1"></div>
                     <div class="color2"></div>
                     <div class="color3"></div>
                 </div>
-                <h2 class="text-start mt-3">Explore Our Color Palette</h2>
-                <p class="text-start">Browse through this collection of modern colors for your next project.</p>
-                <div class="color-palette mt-5">
+                <h2 class="text-center mt-3">Explore Our Color Palette</h2>
+                <p class="text-center">Browse through this collection of modern colors for your next project.</p>
+                <div class="color-palette mt-3">
                     <!-- Color Block 1 -->
                     <div class="color-block color-1"></div>
                     <!-- Color Block 2 -->
@@ -157,13 +159,14 @@ SnappyURL - A Popular Online URL Shortener
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="copyModalLabel">Color Code Copied</h5><span class="mt-1 ms-1"> 🙂</span>
-                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     The color code has been successfully copied to your clipboard!
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn gradient-btn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn generic-button" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -173,6 +176,13 @@ SnappyURL - A Popular Online URL Shortener
     <!-- Code for Other content -->
     <hr>
 
+    <div class="row">
+        <div class="col-md-8">
+            <div class="color-palette-container">
+
+            </div>
+        </div>
+    </div>
 
 </div>
 

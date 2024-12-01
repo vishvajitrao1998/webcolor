@@ -10,7 +10,6 @@ uploadZone.addEventListener('dragover', (e) => {
 });
 
 uploadZone.addEventListener('dragleave', () => {
-
     uploadZone.style.backgroundColor = '#ecf0f1';
 });
 
@@ -42,7 +41,6 @@ function displayImage(file) {
         // Close
         previewImg.src = e.target.result;
         imagePreview.style.display = 'block';
-        imagePreview.style.objectFit = 'contain';
     };
     reader.readAsDataURL(file);
 }

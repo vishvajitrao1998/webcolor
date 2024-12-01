@@ -19,10 +19,25 @@
 
     </title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-        <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=66936679e1507500197b016e&product=sop' async='async'></script>
+    <script type='text/javascript'
+        src='https://platform-api.sharethis.com/js/sharethis.js#property=66936679e1507500197b016e&product=sop'
+        async='async'></script>
     <link rel="stylesheet" href="{% static 'colors/css/bootstrap_5.3.3/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'colors/css/style.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'colors/images/icons/favicon.png' %}">    
+    <link rel="icon" type="image/png" href="{% static 'colors/images/icons/favicon.png' %}">
+    <style>
+        .balloons {
+            background-image: url("{% static 'colors/images/Balloons.svg' %}");
+            background-size: cover;
+            /* To make the background image cover the entire screen */
+            background-position: center center;
+            /* To center the background */
+            top: -390px;
+            left: 30px;
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
 </head>
 
 <body>
