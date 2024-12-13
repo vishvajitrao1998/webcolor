@@ -202,9 +202,10 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
 }
 
-#imagePreview img {
+#imagePreview > canvas {
     max-height: 550px;
 }
 
@@ -619,7 +620,7 @@ body {
 }
 
 .color-codes-rgbtohex {
-    --image-section-height: 500px;
+    --image-section-height: 370px;
     height: var(--image-section-height);
     box-shadow: var(--box-shadow);
     border: 2px solid transparent;
@@ -632,7 +633,7 @@ body {
 }
 
 .color-codes-hextorgb {
-    --image-section-height: 500px;
+    --image-section-height: 370px;
     height: var(--image-section-height);
     box-shadow: var(--box-shadow);
     border: 2px solid transparent;
@@ -669,8 +670,9 @@ body {
 .color-preview {
     width: 60px;
     height: 60px;
+    border: 1px solid grey;
     border-radius: var(--border-radius-second);
-    background-color: #14de39;
+    background-color: var(--sixth-color);
 }
 
 /* .navbar-nav .nav-item {
@@ -805,7 +807,7 @@ body {
 
 /* ================ Code for color palettes =============== */
 .color-palettes-container {
-    --image-section-height: 500px;
+    --image-section-height: 400px;
     height: var(--image-section-height);
     box-shadow: var(--box-shadow);
     border: 2px solid transparent;

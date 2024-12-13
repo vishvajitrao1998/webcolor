@@ -33,7 +33,8 @@ SnappyURL - A Popular Online URL Shortener
                 </div>
                 <!-- Image preview container -->
                 <div id="imagePreview" style="display: none;">
-                    <img id="previewImg" src="" alt="Uploaded Image" class="img-fluid">
+                    <!-- <img id="previewImg" src="" alt="Uploaded Image" class="img-fluid"> -->
+                    <canvas id="previewImg"> </canvas>
                 </div>
             </div>
         </div>
@@ -126,7 +127,7 @@ SnappyURL - A Popular Online URL Shortener
                 </div>
                 <h2 class="text-center mt-3">Explore Our Color Palette</h2>
                 <p class="text-center">Browse through this collection of modern colors for your next project.</p>
-                <div class="color-palette mt-3">
+                <div class="color-palette mt-3" id="color-palette">
                     <!-- Color Block 1 -->
                     <div class="color-block color-1">Hello</div>
                     <!-- Color Block 2 -->

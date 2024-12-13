@@ -1,12 +1,13 @@
+// ============= Code to Extract Dominate Colors from Image =================
+
 const uploadZone = document.getElementById('upload-zone');
 const uploadContainer = document.getElementById('upload-container');
 const fileInput = document.getElementById('fileInput');
 const imagePreview = document.getElementById('imagePreview');
-const previewImg = document.getElementById('previewImg');
+const canvas = document.getElementById('previewImg');
 
 
 if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && previewImg) {
-
     // Handle drag and drop events
     uploadZone.addEventListener('dragover', (e) => {
         e.preventDefault();
@@ -39,17 +40,81 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
     function displayImage(file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            // Code to hide drag and drop section from code and display loaded image
+            // Load the image into a canvas for processing
+            const img = new Image();
+            // Hide the upload container and show the preview
             uploadContainer.style.display = 'none';
-            // Close
-            previewImg.src = e.target.result;
+            img.src = e.target.result;
             imagePreview.style.display = 'block';
+            img.onload = function () {
+                const ctx = canvas.getContext('2d');
+                // Set canvas dimensions to match the image
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // Draw the image onto the canvas
+                ctx.drawImage(img, 0, 0);
+                extractColors(ctx, canvas.width, canvas.height);
+                displayColorPalette(colors);
+                // const imageData = ctx.getImageData(0, 0, width, height);
+            };
+            // img.src = e.target.result;
         };
         reader.readAsDataURL(file);
     }
+
+
+    // Extract dominant colors
+    function extractColors(ctx, width, height) {
+        const imageData = ctx.getImageData(0, 0, width, height);
+        const data = imageData.data;
+        const colorCount = {};
+
+        // Count pixel colors
+        for (let i = 0; i < data.length; i += 4) {
+            const r = data[i];
+            const g = data[i + 1];
+            const b = data[i + 2];
+            const rgb = `rgb(${r},${g},${b})`;
+            colorCount[rgb] = (colorCount[rgb] || 0) + 1;
+        }
+
+        // Sort colors by frequency
+        const sortedColors = Object.keys(colorCount).sort((a, b) => colorCount[b] - colorCount[a]);
+        const colors = sortedColors.splice(0, 8);
+        displayColorPalette(colors);
+    }
+
+
+    function displayColorPalette(colors) {
+        const paletteContainer = document.getElementById('color-palette');
+        paletteContainer.innerHTML = ''; // Clear previous palette
+
+        colors.forEach(color => {
+            const colorBox = document.createElement('div');
+            colorBox.classList.add('color-block');
+            colorBox.style.backgroundColor = color;
+            colorBox.style.width = '80px';
+            colorBox.style.height = '80px';
+            colorBox.style.margin = '5px';
+            colorBox.style.cursor = 'pointer';
+
+            // Add click-to-copy functionality
+            colorBox.onclick = () => {
+                navigator.clipboard.writeText(color);
+                alert(`Copied ${color} to clipboard!`);
+            };
+
+            paletteContainer.appendChild(colorBox);
+        });
+    }
+
 }
 
 
+
+
+// ===================== Closing Here ============================
 
 // Code for copy to clipboard
 
@@ -77,7 +142,18 @@ function copyToClipboard(value) {
 
 
 
-// Code to convert RGB To HEX
+// ======== Code to convert RGB To HEX ================
+
+
+// Function to display a modal with a specific message
+function showModal(message) {
+    let modalMessage = document.getElementById('modal-body');
+    modalMessage.textContent = message;
+    var myModal = new bootstrap.Modal(document.getElementById('copyModal'), {
+        keyboard: false
+    });
+    myModal.show();
+}
 
 // Select elements from the DOM
 const redInput = document.getElementById("red");
@@ -85,11 +161,11 @@ const greenInput = document.getElementById("green");
 const blueInput = document.getElementById("blue");
 const convertBtn = document.getElementById("convertBtn");
 const resetBtn = document.getElementById("resetBtn");
-const hexValueDisplay = document.getElementById("hexValue");
-const errorMessage = document.getElementById("errorMessage");
+const hexValue = document.getElementById("hex-code");
+const rgbCode = document.getElementById("rgb-code");
+const colorPreview = document.getElementById("color-preview");
 // Function to convert RGB to Hex
 function rgbToHex(r, g, b) {
-    // Convert each value to Hex and pad with zero if necessary
     const redHex = r.toString(16).padStart(2, '0').toUpperCase();
     const greenHex = g.toString(16).padStart(2, '0').toUpperCase();
     const blueHex = b.toString(16).padStart(2, '0').toUpperCase();
@@ -98,39 +174,30 @@ function rgbToHex(r, g, b) {
 
 // Function to validate input values and convert them to Hex
 function convertRGBToHex() {
-    const modalMessage = document.getElementById('modal-body');
-    const red = parseInt(redInput.value);
-    const green = parseInt(greenInput.value);
-    const blue = parseInt(blueInput.value);
+    const red = parseInt(redInput.value, 10);
+    const green = parseInt(greenInput.value, 10);
+    const blue = parseInt(blueInput.value, 10);
 
-
-    // Check if any of the RGB values are out of range or empty
-    if (redInput.value === '' || greenInput.value === '' || blueInput.value === '') {
-        // Show the modal if any field is empty
-        const modalMessage = document.getElementsByClassName('modal-body')[0];
-        modalMessage.textContent = 'All RGB fields must be filled in.';
-
-        var myModal = new bootstrap.Modal(document.getElementById('copyModal'), {
-            keyboard: false
-        });
-        myModal.show();
-    }
 
     // Check if any of the RGB values are out of range
-    else if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
-
-        // Show the modal if the copy was successful
-        modalMessage.textContent = 'Value of RGB must be between 0 and 255.';
-        var myModal = new bootstrap.Modal(document.getElementById('copyModal'), {
-            keyboard: false
-        });
-        myModal.show();
+    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
+        showModal('Value of RGB must be between 0 and 255.');
     }
 
-    // No error, proceed to convert to Hex
-    const hexColor = rgbToHex(red, green, blue);
-    hexValueDisplay.textContent = `Hex: ${hexColor}`;
-    errorMessage.textContent = '';  // Clear any previous error messages
+    // Check if any of the RGB values are out of range or empty
+    else if (redInput.value === '' || greenInput.value === '' || blueInput.value === '') {
+        showModal('All RGB fields must be filled in.');
+    }
+
+    else {
+        // No error, proceed to convert to Hex
+        const hexColor = rgbToHex(parseInt(red), parseInt(green), parseInt(blue));
+        colorPreview.style.backgroundColor = `rgb(${parseInt(red)}, ${parseInt(green)}, ${parseInt(blue)})`;
+        colorPreview.style.border = '1px solid grey';
+        hexValue.textContent = `${hexColor}`;
+        rgbCode.textContent = `rgb(${parseInt(red)}, ${parseInt(green)}, ${parseInt(blue)})`
+    }
+
 }
 
 // Function to reset all values
@@ -138,13 +205,60 @@ function resetValues() {
     redInput.value = '';
     greenInput.value = '';
     blueInput.value = '';
-    hexValueDisplay.textContent = '';
-    errorMessage.textContent = '';
+    colorPreview.style.border = '1px solid grey';
+    colorPreview.style.backgroundColor = `#FFFFFF`;
+    hexValue.textContent = `#FFFFFF`;
+    rgbCode.textContent = 'rgb(rgb(255, 255, 255)'
 }
 
-// Event listeners for the buttons
-convertBtn.addEventListener("click", convertRGBToHex);
-resetBtn.addEventListener("click", resetValues);
 
 
-//   Close
+
+// ================= Code to Hex to RGB ==================
+
+// Select elements from the DOM
+const hexColorPreview = document.getElementById("hex-color-preview");
+const modalMessage = document.getElementById('modal-body');
+const modalElement = document.getElementById('copyModal');
+const hexCode = document.getElementById('hexCode');
+
+// Function to convert Hex to RGB
+function hexToRGB(hex) {
+    // Remove the "#" if it exists
+    if (hex.startsWith("#")) {
+        hex = hex.slice(1);
+    }
+    // Convert the hex values to integers
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4, 6), 16);
+    return { r, g, b };
+}
+
+// Function to validate input values and convert them to RGB
+function convertHexToRGB() {
+    const hex = hexValue.value.trim();
+
+    // Validate hex color format
+    const hexRegex = /^#?([a-fA-F0-9]{6})$/;
+    if (!hexRegex.test(hex)) {
+        showModal('Please enter a valid 6-digit hex color code (e.g., #FFFFFF).');
+    } else {
+        // No error, proceed to convert to RGB
+        const { r, g, b } = hexToRGB(hex);
+        colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        rgbCode.textContent = `rgb(${r}, ${g}, ${b})`;
+        hexCode.innerText = hex;
+    }
+}
+
+// Function to reset all values
+function resetHexValues() {
+    hexValue.value = '';
+    hexCode.innerText = '#FFFFFF';
+    rgbCode.innerText = '#FFFFFF';
+    colorPreview.style.backgroundColor = '#FFFFFF';
+    colorPreview.style.border = '1px solid grey';
+}
+
+// ============ Close ===============
