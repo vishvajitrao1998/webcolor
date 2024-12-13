@@ -42,6 +42,8 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
         reader.onload = function (e) {
             // Load the image into a canvas for processing
             const img = new Image();
+            // Using color thief
+            const colorThief = new ColorThief();
             // Hide the upload container and show the preview
             uploadContainer.style.display = 'none';
             img.src = e.target.result;
@@ -54,9 +56,11 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
 
                 // Draw the image onto the canvas
                 ctx.drawImage(img, 0, 0);
-                extractColors(ctx, canvas.width, canvas.height);
-                displayColorPalette(colors);
-                // const imageData = ctx.getImageData(0, 0, width, height);
+                // extractColors(ctx, canvas.width, canvas.height);
+
+                // Getting color palette
+                const palette = colorThief.getPalette(canvas, 8);  // Get 8 dominant colors
+                displayColorPalette(palette);
             };
             // img.src = e.target.result;
         };
@@ -65,32 +69,37 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
 
 
     // Extract dominant colors
-    function extractColors(ctx, width, height) {
-        const imageData = ctx.getImageData(0, 0, width, height);
-        const data = imageData.data;
-        const colorCount = {};
+    // function extractColors(ctx, width, height) {
 
-        // Count pixel colors
-        for (let i = 0; i < data.length; i += 4) {
-            const r = data[i];
-            const g = data[i + 1];
-            const b = data[i + 2];
-            const rgb = `rgb(${r},${g},${b})`;
-            colorCount[rgb] = (colorCount[rgb] || 0) + 1;
-        }
+        // ============ THis code to get colors from canvas =======
+        // const imageData = ctx.getImageData(0, 0, width, height);
+        // const data = imageData.data;
+        // const colorCount = {};
 
-        // Sort colors by frequency
-        const sortedColors = Object.keys(colorCount).sort((a, b) => colorCount[b] - colorCount[a]);
-        const colors = sortedColors.splice(0, 8);
-        displayColorPalette(colors);
-    }
+        // // Count pixel colors
+        // for (let i = 0; i < data.length; i += 4) {
+        //     const r = data[i];
+        //     const g = data[i + 1];
+        //     const b = data[i + 2];
+        //     const rgb = `rgb(${r},${g},${b})`;
+        //     colorCount[rgb] = (colorCount[rgb] || 0) + 1;
+        // }
 
+        // // Sort colors by frequency
+        // const sortedColors = Object.keys(colorCount).sort((a, b) => colorCount[b] - colorCount[a]);
+        // const colors = sortedColors.splice(0, 8);
+
+
+        // =============== Closing ================
+
+        // displayColorPalette(colors);
+    // }
 
     function displayColorPalette(colors) {
         const paletteContainer = document.getElementById('color-palette');
         paletteContainer.innerHTML = ''; // Clear previous palette
-
         colors.forEach(color => {
+            color = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
             const colorBox = document.createElement('div');
             colorBox.classList.add('color-block');
             colorBox.style.backgroundColor = color;
