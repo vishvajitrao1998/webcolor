@@ -20,7 +20,7 @@ SnappyURL - A Popular Online URL Shortener
             </h2>
             <p class="generic-para ms-3">A Hex code (short for hexadecimal code) is a way to represent colors in digital
                 systems, commonly used in web design, graphic design, and software development.</p>
-            <a href="/" class="btn color-gallary ms-5 mt-3">Explore Color Palettes <svg
+            <a href="/color-palettes" class="btn color-gallary ms-5 mt-3">Explore Color Palettes <svg
                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -39,15 +39,12 @@ SnappyURL - A Popular Online URL Shortener
                         </div>
                     </div>
                     <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">
-                        <button class="btn mt-3 mt-lg-0 ms-lg-3" id="converter-btn" onclick="convertHexToRGB()">Convert to RGB</button>
-                        <button class="btn mt-3 mt-lg-0 ms-lg-3" id="converter-btn" onclick="resetHexValues()">Reset</button>
+                        <button class="btn mt-3 mt-lg-0 ms-lg-3" id="converter-btn" onclick="convertHexToRGB()">Convert
+                            to RGB</button>
+                        <button class="btn mt-3 mt-lg-0 ms-lg-3" id="converter-btn"
+                            onclick="resetHexValues()">Reset</button>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="rgbtohex-article">
-                <h1 class="">What is RGB</h1>
             </div>
         </div>
         <div class="col-md-4">
@@ -96,16 +93,93 @@ SnappyURL - A Popular Online URL Shortener
                         </svg>
                     </div>
                 </div>
-               
+
             </div>
         </div>
 
+        <hr>
+        <div class="hextorgb-article">
+            <h2 class="text-justify">Understanding Hex and RGB Color Models</h2>
+            <p>
+                <strong>Hexadecimal (Hex)</strong>: A Hex color code is a 6-character string that starts with a #. It is
+                composed of three 2-character pairs representing the <span class="red">Red</span>, <span
+                    class="green">Green</span>, and <span class="blue">Blue</span> components. Each pair is a
+                hexadecimal value (from 00 to FF), which corresponds to values between 0 and 255 in decimal.
+            </p>
 
+            <p><strong>Example:</strong></p>
+            <p>#FF5733</p>
+            <ul>
+                <li>FF represents the <span class="red">Red</span> component.</li>
+                <li>57 represents the <span class="green">Green</span> component.</li>
+                <li>33 represents the <span class="blue">Blue</span> component.</li>
+            </ul>
 
+            <p><strong>RGB (Red, Green, Blue):</strong> The RGB color model represents a color using three values
+                corresponding to the intensity of <span class="red">Red</span>, <span class="green">Green</span>, and
+                <span class="blue">Blue</span>. Each component can range from 0 to 255.</p>
+
+            <p><strong>Example: </strong></p>
+            <p>rgb(255, 87, 51)</p>
+
+            <ul>
+                <li>255 is the intensity of <span class="red">Red</span>.</li>
+                <li>87 is the intensity of <span class="green">Green</span>.</li>
+                <li>51 is the intensity of <span class="blue">Blue</span>.</li>
+            </ul>
+
+            <h2>Steps to Convert Hex to RGB</h2>
+            <p>To convert Hex to RGB, follow these steps:</p>
+
+            <ol>
+                <li>Remove the '#' character: The Hex code starts with a #, so remove it for easier manipulation.</li>
+                <li>Split the Hex code into three parts: Divide the Hex code into three pairs, each representing the
+                    <span class="red">Red</span>, <span class="green">Green</span>, and <span class="blue">Blue</span>
+                    components:
+                    <ul>
+                        <li>The first two characters represent the <span class="red">Red</span> component.</li>
+                        <li>The next two characters represent the <span class="green">Green</span> component.</li>
+                        <li>The last two characters represent the <span class="blue">Blue</span> component.</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Convert the Hex values to Decimal: Convert each of the three Hex pairs from hexadecimal to decimal
+                    (base 10).
+                </li>
+                <li>
+                    Output the RGB value: Combine the decimal values to form the RGB format.
+                </li>
+            </ol>
+
+            <h3>Example Conversion</h3>
+            <p>Consider the Hex code #FF5733.</p>
+            <ol>
+                <li>Remove the '#': FF5733</li>
+                <li>Split the Hex code into three parts:
+                    <ul>
+                        <li><span class="red">Red</span>: FF</li>
+                        <li><span class="green">Green</span>: 57</li>
+                        <li><span class="blue">Blue</span>: 33</li>
+                    </ul>
+                </li>
+
+                <li>Convert each pair from Hex to Decimal:
+                    <ol>
+                        <li><span class="red">Red</span>: FF in Hex = 255 in Decimal.</li>
+                        <li><span class="green">Green</span>: 57 in Hex = 87 in Decimal.</li>
+                        <li><span class="blue">Blue</span>: 33 in Hex = 51 in Decimal.</li>
+                    </ol>
+                </li>
+                <li>Resulting RGB value rgb(255, 87, 51)</li>
+            </ol>
+
+        </div>
     </div>
+    <hr>
 
     <div class="row">
-        
+
         <div class="col-md-10 offset-md-1 mt-2">
             <div class="color-palette-section mb-5 text-center py-4">
                 <div class="colors-group">
@@ -120,53 +194,12 @@ SnappyURL - A Popular Online URL Shortener
                 <p class="text-center">Browse through this collection of modern colors for your next project.</p>
                 <div class="color-palette mt-3">
                     <!-- Color Block 1 -->
-                    <div class="color-block color-1">Hello</div>
-                    <!-- Color Block 2 -->
-                    <div class="color-block color-2"></div>
-                    <!-- Color Block 3 -->
-                    <div class="color-block color-3"></div>
-                    <!-- Color Block 4 -->
-                    <div class="color-block color-4"></div>
-                    <!-- Color Block 5 -->
-                    <div class="color-block color-5"></div>
-                    <!-- Color Block 6 -->
-                    <div class="color-block color-6"></div>
-                    <!-- Color Block 7 -->
-                    <div class="color-block color-7"></div>
-                    <!-- Color Block 8 -->
-                    <div class="color-block color-8"></div>
-                    <!-- Color Block 1 -->
-                    <div class="color-block color-1">Hello</div>
-                    <!-- Color Block 2 -->
-                    <div class="color-block color-2"></div>
-                    <!-- Color Block 3 -->
-                    <div class="color-block color-3"></div>
-                    <!-- Color Block 4 -->
-                    <div class="color-block color-4"></div>
-                    <!-- Color Block 5 -->
-                    <div class="color-block color-5"></div>
-                    <!-- Color Block 6 -->
-                    <div class="color-block color-6"></div>
-                    <!-- Color Block 7 -->
-                    <div class="color-block color-7"></div>
-                    <!-- Color Block 8 -->
-                    <div class="color-block color-8"></div>
-                    <!-- Color Block 1 -->
-                    <div class="color-block color-1">Hello</div>
-                    <!-- Color Block 2 -->
-                    <div class="color-block color-2"></div>
-                    <!-- Color Block 3 -->
-                    <div class="color-block color-3"></div>
-                    <!-- Color Block 4 -->
-                    <div class="color-block color-4"></div>
-                    <!-- Color Block 5 -->
-                    <div class="color-block color-5"></div>
-                    <!-- Color Block 6 -->
-                    <div class="color-block color-6"></div>
-                    <!-- Color Block 7 -->
-                    <div class="color-block color-7"></div>
-                    <!-- Color Block 8 -->
-                    <div class="color-block color-8"></div>
+                    {% for hexValue in hex_codes %}
+                    <div class="color-block" style="background-color: {{hexValue}};" data-index="{{ forloop.counter }}" onclick="copyToClipboardColorPalette('{{hexValue}}')">
+                    </div>
+
+                    {% endfor %}
+                
                 </div>
             </div>
 
@@ -180,12 +213,12 @@ SnappyURL - A Popular Online URL Shortener
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="copyModalLabel">Color Code Copied</h5><span class="mt-1 ms-1"> 🙂</span>
+                    <img src="{% static 'colors/images/SnappyColor.svg' %}" alt="SnappyURL" width="100px;">
                     <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modal-body">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn generic-button" data-bs-dismiss="modal">Close</button>

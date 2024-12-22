@@ -5,6 +5,13 @@ const uploadContainer = document.getElementById('upload-container');
 const fileInput = document.getElementById('fileInput');
 const imagePreview = document.getElementById('imagePreview');
 const canvas = document.getElementById('previewImg');
+let colorPickerCircle = document.getElementById('color-picker');
+let isColorPickerActive = false;
+
+if (document.getElementById('colorPickerBtn')){
+    document.getElementById('colorPickerBtn').addEventListener('click', activateColorPicker);
+}
+
 
 
 if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && previewImg) {
@@ -50,13 +57,14 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
             imagePreview.style.display = 'block';
             img.onload = function () {
                 const ctx = canvas.getContext('2d');
-                // Set canvas dimensions to match the image
-                canvas.width = img.width;
-                canvas.height = img.height;
-
-                // Draw the image onto the canvas
-                ctx.drawImage(img, 0, 0);
-                // extractColors(ctx, canvas.width, canvas.height);
+                const containerWidth = canvas.parentElement.offsetWidth; // Get parent width
+                const containerHeight = Math.min(550, img.height * (containerWidth / img.width));  // Adjust the height to maintain aspect ratio
+                // Set the canvas width and height based on the container size
+                canvas.width = containerWidth;
+                canvas.height = containerHeight;
+            
+                // Draw the image on the canvas, scaling it to fit
+                ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
 
                 // Getting color palette
                 const palette = colorThief.getPalette(canvas, 8);  // Get 8 dominant colors
@@ -67,42 +75,14 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
         reader.readAsDataURL(file);
     }
 
-
-    // Extract dominant colors
-    // function extractColors(ctx, width, height) {
-
-        // ============ THis code to get colors from canvas =======
-        // const imageData = ctx.getImageData(0, 0, width, height);
-        // const data = imageData.data;
-        // const colorCount = {};
-
-        // // Count pixel colors
-        // for (let i = 0; i < data.length; i += 4) {
-        //     const r = data[i];
-        //     const g = data[i + 1];
-        //     const b = data[i + 2];
-        //     const rgb = `rgb(${r},${g},${b})`;
-        //     colorCount[rgb] = (colorCount[rgb] || 0) + 1;
-        // }
-
-        // // Sort colors by frequency
-        // const sortedColors = Object.keys(colorCount).sort((a, b) => colorCount[b] - colorCount[a]);
-        // const colors = sortedColors.splice(0, 8);
-
-
-        // =============== Closing ================
-
-        // displayColorPalette(colors);
-    // }
-
     function displayColorPalette(colors) {
         const paletteContainer = document.getElementById('color-palette');
         paletteContainer.innerHTML = ''; // Clear previous palette
         colors.forEach(color => {
-            color = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
+            let rgbColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
             const colorBox = document.createElement('div');
             colorBox.classList.add('color-block');
-            colorBox.style.backgroundColor = color;
+            colorBox.style.backgroundColor = rgbColor;
             colorBox.style.width = '80px';
             colorBox.style.height = '80px';
             colorBox.style.margin = '5px';
@@ -110,8 +90,13 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
 
             // Add click-to-copy functionality
             colorBox.onclick = () => {
-                navigator.clipboard.writeText(color);
-                alert(`Copied ${color} to clipboard!`);
+                let rgbValue = document.getElementById("rgb-code");
+                let hexValue = document.getElementById("hex-code");
+                let colorPreview = document.getElementById("color-preview");
+                colorPreview.style.background = rgbColor;
+                rgbValue.textContent = rgbColor;
+                hexValue.textContent = rgbToHex(color[0], color[1], color[2]);
+
             };
 
             paletteContainer.appendChild(colorBox);
@@ -122,6 +107,83 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
 
 
 
+// Activate Color Picker
+function activateColorPicker() {
+    isColorPickerActive = !isColorPickerActive;
+    if (isColorPickerActive) {
+    } else {
+        colorPickerCircle.style.display = 'none';  // Hide color picker circle
+    }
+}
+
+// ============ Code to update color preview only ===============
+if (canvas)
+{
+    canvas.addEventListener('mousemove', function (e) {
+        if (isColorPickerActive) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const ctx = canvas.getContext('2d');
+            // Get pixel data at mouse position
+            const pixel = ctx.getImageData(x, y, 1, 1).data;
+            const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+    
+            // Update color picker position and background color
+            colorPickerCircle.style.left = `${x - 20}px`;
+            colorPickerCircle.style.top = `${y - 20}px`;
+            colorPickerCircle.style.backgroundColor = color;
+            colorPickerCircle.style.display = 'block';  // Show color picker circle
+            let colorPreview = document.getElementById("color-preview");
+            colorPreview.style.background = color;
+        }
+    });
+    
+}
+
+// ============ Code to update Hex value and RGB Value ==================
+if (canvas)
+{
+    canvas.addEventListener('click', function (e) {
+        if (isColorPickerActive) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const ctx = canvas.getContext('2d');
+            // Get pixel data at mouse position
+            const pixel = ctx.getImageData(x, y, 1, 1).data;
+            const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+    
+            // Update color picker position and background color
+            colorPickerCircle.style.left = `${x - 20}px`;
+            colorPickerCircle.style.top = `${y - 20}px`;
+            colorPickerCircle.style.backgroundColor = color;
+            colorPickerCircle.style.display = 'block';  // Show color picker circle
+    
+            let rgbValue = document.getElementById("rgb-code");
+            let hexValue = document.getElementById("hex-code");
+            let colorPreview = document.getElementById("color-preview");
+            colorPreview.style.background = color;
+            rgbValue.textContent = color;
+            hexValue.textContent = rgbToHex(pixel[0], pixel[1], pixel[2]);
+        }
+    });
+    
+}
+
+// Hide color picker when mouse leaves the image
+if (uploadContainer)
+{
+    uploadContainer.addEventListener('mouseleave', function () {
+        if (isColorPickerActive) {
+            colorPickerCircle.style.display = 'none';  // Hide color picker circle when leaving the image
+        }
+    });
+}
+
+
+
+
 
 // ===================== Closing Here ============================
 
@@ -129,8 +191,6 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
 
 function copyToClipboard(value) {
     var textToCopy = document.getElementById(value).innerText; // Get the text to copy
-    console.log(textToCopy);
-
     // Use the Clipboard API to copy the text to the clipboard
     const modalMessage = document.getElementById('modal-body');
     modalMessage.textContent = "The color code has been successfully copied to your clipboard!";
@@ -145,8 +205,6 @@ function copyToClipboard(value) {
         alert('Failed to copy text: ' + error);
     });
 };
-
-
 // close
 
 
@@ -157,7 +215,7 @@ function copyToClipboard(value) {
 // Function to display a modal with a specific message
 function showModal(message) {
     let modalMessage = document.getElementById('modal-body');
-    modalMessage.textContent = message;
+    modalMessage.innerHTML = message;
     var myModal = new bootstrap.Modal(document.getElementById('copyModal'), {
         keyboard: false
     });
@@ -271,3 +329,36 @@ function resetHexValues() {
 }
 
 // ============ Close ===============
+
+
+// ======== Copy to Clipboard for Color Palette =======
+
+// Code for copy to clipboard
+function copyToClipboardColorPalette(value) {
+    // Use the Clipboard API to copy the text to the clipboard
+    if( value.length <= 7){
+        navigator.clipboard.writeText(value);
+        showModal("The color code has been successfully copied to your clipboard!")
+    }
+
+    else {
+        showModal("Color palette link has been copied, Share it!")
+    }
+   
+};
+
+
+function copyToClipboardColorChart(value) {
+    // Use the Clipboard API to copy the text to the clipboard
+    if( value.length <= 7){
+        navigator.clipboard.writeText(value);
+        showModal(`<p>The color code <strong>${value} </strong> has been copied!</p>`)
+    }
+    else {
+        showModal("Color palette link has been copied, Share it!")
+    }
+   
+};
+// close
+
+

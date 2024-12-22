@@ -8,4 +8,5 @@ urlpatterns = [
     path('rgb-to-hex', rgbtohex, name='rgbtohex'),
     path('hex-to-rgb', hextorgb, name='hextorgb'),
     path('color-palettes', color_palettes, name='color_palettes'),
+    path('color-chart', color_chart, name='color_chart'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

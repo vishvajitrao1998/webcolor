@@ -165,6 +165,16 @@ body {
     /* Optional: smooth transition for background */
 }
 
+.file-upload button {
+    cursor: var(--cursor);
+    display: inline-block;
+    padding: 10px;
+    background-color: var(--fourth-color);
+    transition: background-color 0.3s ease;
+    border: none;
+    border-radius: 5px;
+}
+
 .file-upload label:hover {
     background-color: var(--fourth-color);
     /* Change background color on hover */
@@ -202,12 +212,12 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
+    position: relative;
+    width: 100%;
+
 }
 
-#imagePreview > canvas {
-    max-height: 550px;
-}
+
 
 
 /* Styling the drag-and-drop zone */
@@ -258,6 +268,17 @@ body {
     /* Light green when dragging over */
 }
 
+#color-picker {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    pointer-events: none;
+    display: none;
+    z-index: 10;
+}
+
 
 .color-palette-section {
     background-color: var(--first-color);
@@ -298,7 +319,7 @@ body {
 /* Color blocks layout */
 .color-palette {
     display: grid;
-    column-gap: 10px;
+    column-gap: 2px;
     row-gap: 20px;
     grid-template-columns: repeat(8, 80px);
     /* Flexible grid columns */
@@ -312,10 +333,10 @@ body {
 
 /* Color Block Styling */
 .color-block {
-    height: 80px;
-    width: 80px;
+    height: 50px;
+    width: 50px;
     background-color: #ccc;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     cursor: var(--cursor);
     transition: transform 0.4s ease-in, color 0.4s ease-in;
     display: flex;
@@ -329,41 +350,19 @@ body {
     color: var(--first-color);
 }
 
-/* Optional: Add unique color backgrounds to each block */
-.color-1 {
-    background-color: #FF5733;
-    color: #FF5733;
+/* Color blocks layout */
+.color-palette {
+    display: grid;
+    column-gap: 2px;
+    row-gap: 20px;
+    grid-template-columns: repeat(8, 80px);
+    /* Flexible grid columns */
+    justify-content: center;
+    /* Centering items horizontally within grid cells */
+    align-items: center;
+    /* Centering items vertically within grid cells */
+
 }
-
-.color-2 {
-    background-color: #33FF57;
-}
-
-.color-3 {
-    background-color: #3357FF;
-}
-
-.color-4 {
-    background-color: #F1C40F;
-}
-
-.color-5 {
-    background-color: #9B59B6;
-}
-
-.color-6 {
-    background-color: #1ABC9C;
-}
-
-.color-7 {
-    background-color: #E74C3C;
-}
-
-.color-8 {
-    background-color: #3498DB;
-}
-
-
 
 #copyModalLabel {
     background-image: var(--bg-image);
@@ -458,7 +457,32 @@ body {
     color: var(--sixth-color);
 }
 
-.category-name {
+
+.color-palette-header-category {
+    display: grid;
+    row-gap: 10px;
+    column-gap: 10px;
+    grid-template-columns: repeat(5, minmax(60px, 1fr));
+    justify-content: center;
+    color: var(--sixth-color);
+}
+
+.color-palette-header-category .category-name {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: var(--cursor);
+    box-shadow: 0 0 1px 1px var(--fourth-color);
+    color: white;
+
+}
+
+
+
+.color-palette-category .category-name {
     display: flex;
     background-color: var(--sixth-color);
     height: 50px;
@@ -647,6 +671,13 @@ body {
 
 
 .heading-section-rgbtohex {
+    background-color: var(--first-color);
+    height: var(--main-section-height);
+    border-radius: 8px;
+}
+
+
+.color-chart-heading-section {
     background-color: var(--first-color);
     height: var(--main-section-height);
     border-radius: 8px;
@@ -856,6 +887,10 @@ body {
 }
 
 
+.color-code {
+    cursor: pointer;
+}
+
 .third-color>.color-section {
     height: 200px;
     width: 80px;
@@ -900,9 +935,145 @@ body {
 /* Close */
 
 
+
+.color-gallary {
+
+    background-color: #d57b0a;
+    padding: 15px;
+    font-size: var(--fourth-color);
+    border-radius: var(--border-radius-second);
+    cursor: var(--cursor);
+    font-size: 20px;
+    color: var(--fourth-color);
+    margin-top: 90px;
+    color: var(--first-color);
+}
+
+.color-gallary:hover {
+
+    background-color: var(--fourth-color);
+    padding: 15px;
+    font-size: var(--fourth-color);
+    border-radius: var(--border-radius-second);
+    cursor: var(--cursor);
+    font-size: 20px;
+    color: var(--fourth-color);
+    margin-top: 90px;
+    color: var(--first-color);
+}
+
+
+
+/* =========== CSS Articles ============== */
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+
+}
+
+.blue {
+    color: blue;
+}
+
+
+/* ========= Close ================ */
+
+/* =========== Color Table CSS */
+
+.color-tables-container h2 {
+    background-image: var(--bg-image);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    font-size: 45px;
+    margin-bottom: 20px;
+    /* text-align: var(--justify-centent); */
+}
+
+
+.color-box {
+    width: 100px;
+    height: 30px;
+    border: 0.5px solid grey;
+    border-radius: 2px;
+}
+
+
+.table-col-heading>th {
+    color: var(--sixth-color);
+    background-color: var(--first-color);
+}
+
+/* ======== CSS ================ */
+
+.color-chart {
+    height: var(--image-section-height);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    transform: translateY(-20%);
+    background-color: var(--sixth-color);
+}
+
+.color-chart h4 {
+    color: var(--first-color);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.color-chart-section {
+    display: flex;
+    justify-content: var(--justify-centent);
+    align-items: var(--aligh-items);
+}
+
+
+/* Color Block Styling */
+.color-chart-container {
+    display: grid;
+    grid-gap: 2px;
+    grid-template-columns: repeat(10, 50px);
+}
+
+/* Color Block Styling */
+.color-chart-container .color-block-chart {
+    height: 50px;
+    width: 50px;
+    /* border-radius: 10px; */
+    cursor: var(--cursor);
+    transition: transform 0.4s ease-in, color 0.4s ease-in;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Color block hover effect */
+.color-chart-container .color-block-chart:hover {
+    transform: scale(1.5);
+    color: var(--first-color);
+}
+
+
 /* Code for device responsive */
 /* Media Query for Medium Screens (tablets) */
 @media (max-width: 768px) {
+
+    .color-chart-heading-section {
+        --main-section-height: 650px;
+        height: var(--main-section-height);
+    }
+    .color-chart {
+        height: auto;
+        transform: translateY(-10%);
+    }
+
+    .color-chart-container {
+        grid-template-columns: repeat(6, 50px);
+    }
+
     .color-palette {
         grid-template-columns: repeat(4, 1fr);
         /* 4 columns for medium screens */
@@ -962,6 +1133,16 @@ body {
 
 /* Media Query for Mobile Screens */
 @media (max-width: 480px) {
+    .color-chart-heading-section {
+        --main-section-height: 650px;
+        height: var(--main-section-height);
+    }
+    .color-chart {
+        height: auto;
+        transform: translateY(-10%);
+    }
+    
+
     .color-palette {
         grid-template-columns: repeat(3, 1fr);
         /* 2 columns for mobile screens */
@@ -969,6 +1150,16 @@ body {
 
     .heading-section {
         height: 550px;
+    }
+
+    .color-chart-container {
+        grid-template-columns: repeat(4, 50px);
+    }
+
+    .color-chart {
+        height: auto;
+        padding: 20px;
+        /* margin-top: 100px; */
     }
 
     .heading-section-rgbtohex {
@@ -1021,51 +1212,3 @@ body {
 }
 
 /* Close */
-
-
-
-.color-gallary {
-
-    background-color: #d57b0a;
-    padding: 15px;
-    font-size: var(--fourth-color);
-    border-radius: var(--border-radius-second);
-    cursor: var(--cursor);
-    font-size: 20px;
-    color: var(--fourth-color);
-    margin-top: 90px;
-    color: var(--first-color);
-}
-
-.color-gallary:hover {
-
-    background-color: var(--fourth-color);
-    padding: 15px;
-    font-size: var(--fourth-color);
-    border-radius: var(--border-radius-second);
-    cursor: var(--cursor);
-    font-size: 20px;
-    color: var(--fourth-color);
-    margin-top: 90px;
-    color: var(--first-color);
-}
-
-
-
-/* =========== CSS Articles ============== */
-
-.red {
-    color: red;
-}
-
-.green {
-    color: green;
-
-}
-
-.blue {
-    color: blue;
-}
-
-
-/* ========= Close ================ */

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titlename %}
+SnappyURL - A Popular Online URL Shortener
+{% endblock %}
+
+{% block meta_tag %}
+<meta name="title" content="SnappyURL - A Popular Online URL Shortener">
+<meta name="keywords"
+    content="URL shortener, shorten URLs, link shortener, free URL shortener, create short links, unshorten URL, link tracking, short URL statistics, QR code generator, custom short URLs, URL shortening service, link management, analytics for short links, online URL shortener, shareable links">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 color-chart-heading-section mt-3">
+            <h1 class="generic-heading mt-4 text-center">
+                Get perfect color for your website or app
+            </h1>
+            <p class="text-center generic-para">Discover, Extract, Create</p>
+        </div>
+        <div class="col-md-6">
+            <div class="color-chart">
+                <h4 class="py-2 fw-bold text-center">Explore Color Here</h4>
+                <div class="color-chart-section">
+                    <div class="color-chart-container">
+                        {% for color in colors %}
+                        <div class="color-block-chart" style="background-color: {{ color.hex }};"
+                            onclick="copyToClipboardColorChart('{{ color.hex }}')"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6 mt-4 mt-lg-0">
+            <div class="color-chart">
+                <h4 class="py-2 fw-bold text-center">Color Variants</h4>
+                <div class="color-chart-section">
+                    <div class="color-chart-container">
+                        {% for color in color_versions %}
+                        <div class="color-block-chart" style="background-color: {{color}};" onclick="copyToClipboardColorChart('{{ color }}')"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-4">
+            <div class="color-chart">
+                <h4 class="py-2 fw-bold text-center">Material Design Colors</h4>
+                <div class="color-chart-section">
+                    <div class="color-chart-container">
+                        {% for color in material_colors %}
+                        <div class="color-block-chart" style="background-color: {{color}};" onclick="copyToClipboardColorChart('{{ color }}')"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-4">
+            <div class="color-chart">
+                <h4 class="py-2 fw-bold text-center">Dark Colors</h4>
+                <div class="color-chart-section">
+                    <div class="color-chart-container">
+                        {% for color in dark_colors %}
+                        <div class="color-block-chart" style="background-color: {{color}};" onclick="copyToClipboardColorChart('{{ color }}')"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+     <!-- Bootstrap Modal -->
+     <div class="modal fade" id="copyModal" tabindex="-1" aria-labelledby="copyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="{% static 'colors/images/SnappyColor.svg' %}" alt="SnappyURL" width="100px;">
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn generic-button" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Close -->
+</div>
+
+{% endblock %}
