@@ -2,10 +2,10 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-custom-style fixed-top">
     <div class="container">
-        <a href="/" class="brandName">
-          <h2 class="mt-2"><img src="{% static 'colors/images/SnappyColor.svg' %}" alt="SnappyURL">
-          </h2>
-        </a>
+      <a href="/" class="brandName">
+        <h2 class="mt-2"><img src="{% static 'colors/images/SnappyColor.svg' %}" alt="SnappyURL">
+        </h2>
+      </a>
       <button class="navbar-toggler shadow-none bg-white" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,16 +20,24 @@
             <a class="nav-link text-white" aria-current="page" href="/color-chart">
               Color Chart</a>
           </li>
-          <li class="nav-item me-1">
-            <a class="nav-link text-white" href="{% url 'rgbtohex' %}">
-          RGB To Hex</a>
-          </li> 
-          <li class="nav-item me-1">
-            <a class="nav-link text-white generic-button-two" href="{% url 'hextorgb' %}">
-              Hex to RGB</a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Color Converter
+            </a>
+            <ul class="dropdown-menu">
+              <li class="nav-item me-1">
+                <a class="dropdown-item" href="{% url 'rgbtohex' %}">
+                  RGB To Hex</a>
+              </li>
+              <li class="nav-item me-1">
+                <a class="dropdown-item generic-button-two" href="{% url 'hextorgb' %}">
+                  Hex to RGB</a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item me-1">
-            <a class="nav-link text-white generic-button-two" href="{% url 'color_palettes' %}">
+            <a class="nav-link text-white generic-button-two" href="{% url 'color_palette' %}">
               Color Palettes</a>
           </li>
         </ul>

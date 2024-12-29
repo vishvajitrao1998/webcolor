@@ -35,9 +35,24 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
         }
     });
 
+    // Code to set a Image on window load
+
+    window.onload = function (){
+        const defaultImage = "http://127.0.0.1:8000/static/colors/images/nature.png";
+        fetch(defaultImage)
+        .then(response => response.blob())
+        .then(blob => {
+            const defaultFile = new File([blob], 'default-image.jpg', { type: blob.type });
+            displayImage(defaultFile); // Process the file as if it were uploaded
+        })
+        .catch(error => console.error('Error loading default image:', error));
+    }
+    // Close
+
     // Handle file input selection
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
+        console.log(file)
         if (file && file.type.startsWith('image')) {
             displayImage(file);
         }
@@ -342,6 +357,8 @@ function copyToClipboardColorPalette(value) {
     }
 
     else {
+        const paletteLink = `${window.location.host}/color-palette/${value}`;
+        navigator.clipboard.writeText(paletteLink);
         showModal("Color palette link has been copied, Share it!")
     }
    
@@ -362,3 +379,8 @@ function copyToClipboardColorChart(value) {
 // close
 
 
+// Code to generator random colors code
+
+
+
+// Close

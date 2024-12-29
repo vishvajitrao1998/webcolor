@@ -174,16 +174,10 @@ SnappyURL - A Popular Online URL Shortener
                 </div>
 
                 <div class="color-palette-category mt-5">
-                    <a href="/" class="btn category-name dark">Dark</a>
-                    <a href="/" class="btn category-name neon">Neon</a>
-                    <a href="/" class="btn category-name cold">Cold</a>
-                    <a href="/" class="btn category-name coffee">Coffee</a>
-                    <a href="/" class="btn category-name Summar">Summar</a>
-                    <a href="/" class="btn category-name dark">Dark</a>
-                    <a href="/" class="btn category-name neon">Neon</a>
-                    <a href="/" class="btn category-name cold">Cold</a>
-                    <a href="/" class="btn category-name coffee">Coffee</a>
-                    <a href="/" class="btn category-name Summar">Summar</a>
+                    {% for category in categories %}
+                    <a href="/{{category.id}}" class="btn category-name dark">{{category.name}}</a>
+                    {% endfor %}
+
                 </div>
 
                 <a href="/color-palettes" class="glow-button text-center">Get All Palettes <svg
@@ -272,8 +266,6 @@ SnappyURL - A Popular Online URL Shortener
                             {% endfor %}
                         </tbody>
                     </table>
-
-
                 </div>
 
             </div>

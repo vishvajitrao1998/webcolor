@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import numpy as np
+from .models import *
 
 # Create your views here.
 
@@ -27,7 +28,10 @@ def home(request):
     {"name": "Coral", "hex": "#FF7F50", "rgb": (255, 127, 80)}
     ]
 
-    return render(request, 'home.html', {"colors": colors})
+    # Getting all the color categories
+    categories = Category.objects.values('id', 'name')
+    print(categories)
+    return render(request, 'home.html', {"colors": colors, "categories": categories})
 
 
 def rgbtohex(request):
@@ -63,8 +67,21 @@ def hextorgb(request):
     return render(request, 'hex-to-rgb.html', {"hex_codes": hex_codes})
 
 
-def color_palettes(request):
-    return render(request, 'color-palettes.html')
+def color_palette(request):
+    # Getting all the color categories
+    categories = Category.objects.values('id', 'name').filter(is_active=True)
+    active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True)
+    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes})
+
+def individual_color_palette(request, id):
+    # Getting all the color categories
+    categories = Category.objects.values('id', 'name').filter(is_active=True)
+    active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True, id=id)
+    if active_palettes:
+        pass
+    else:
+        active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True, category__id=id)
+    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes})
 
 
 def color_chart(request):
@@ -541,8 +558,8 @@ def color_chart(request):
     "#434343",  # Deep Charcoal
     "#5A5A5A"   # Smoke Gray (Deep)
 ]
-
-    return render(request, 'color-chart.html', {'colors': modern_colors, 'color_versions': color_variants, 'material_colors': material_colors, 'dark_colors': dark_colors})
+    web_safe_colors = generate_web_safe_colors()[:60]
+    return render(request, 'color-chart.html', {'colors': modern_colors, 'color_versions': color_variants, 'material_colors': material_colors, 'dark_colors': dark_colors, "web_safe_colors": web_safe_colors})
 
 
 def hex_to_rgb(hex_color):
@@ -595,4 +612,17 @@ def generate_multiple_hex_variants(base_hex_color, num_variants=10, variation_fa
         variants.append(rgb_to_hex((int(new_r), int(new_g), int(new_b))))
     
     return variants
+
+
+def generate_web_safe_colors():
+    safe_values = ["00", "33", "66", "99", "CC", "FF"]
+    colors = [f"#{r}{g}{b}" for r in safe_values for g in safe_values for b in safe_values]
+    return colors
+
+
+
+def web_safe_colors(request):
+    # Generate the list
+    web_safe_colors = generate_web_safe_colors()
+    return render(request, "web_safe_color_chart.html", {"web_safe_colors": web_safe_colors})
 

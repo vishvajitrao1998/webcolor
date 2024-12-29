@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titlename %}
+SnappyURL - A Popular Online URL Shortener
+{% endblock %}
+
+{% block meta_tag %}
+<meta name="title" content="SnappyURL - A Popular Online URL Shortener">
+<meta name="keywords"
+    content="URL shortener, shorten URLs, link shortener, free URL shortener, create short links, unshorten URL, link tracking, short URL statistics, QR code generator, custom short URLs, URL shortening service, link management, analytics for short links, online URL shortener, shareable links">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.min.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 color-chart-heading-section mt-3">
+            <h1 class="generic-heading mt-4 text-center">
+                Web Safe Color Chart
+            </h1>
+            <p class="text-center generic-para">Web safe colors are a specific palette of 216 colors designed to display
+                consistently on computer monitors and web browsers in the early days of the internet when most systems
+                only supported 256 colors.</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Web safe color Chart -->
+    <div class="row" style="margin-top: -10%;">
+        <div class="col-md-12">
+            <div class="web-safe-color-chart py-5 mb-5">
+                <div class="web-safe-color-chart-section">
+                    <div class="web-safe-color-chart-container">
+                        {% for color in web_safe_colors %}
+                        <div class="web-safe-color-block-charts">
+                            <div class="web-safe-color-block-chart" style="background-color: {{color}};">
+                            </div>
+                            <div class="web-safe-color-code" onclick="copyToClipboardColorChart('{{ color }}')">
+                                {{color}}</div>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Close -->
+
+
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="copyModal" tabindex="-1" aria-labelledby="copyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="{% static 'colors/images/SnappyColor.svg' %}" alt="SnappyURL" width="100px;">
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn generic-button" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Close -->
+</div>
+
+{% endblock %}

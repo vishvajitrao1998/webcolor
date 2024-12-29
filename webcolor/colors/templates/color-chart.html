@@ -12,6 +12,7 @@ SnappyURL - A Popular Online URL Shortener
 {% endblock %}
 
 {% block content %}
+
 <div class="container">
     <div class="row">
         <div class="col-md-12 color-chart-heading-section mt-3">
@@ -20,6 +21,11 @@ SnappyURL - A Popular Online URL Shortener
             </h1>
             <p class="text-center generic-para">Discover, Extract, Create</p>
         </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row" style="transform: translateY(-10%);">
+
         <div class="col-md-6">
             <div class="color-chart">
                 <h4 class="py-2 fw-bold text-center">Explore Color Here</h4>
@@ -40,7 +46,8 @@ SnappyURL - A Popular Online URL Shortener
                 <div class="color-chart-section">
                     <div class="color-chart-container">
                         {% for color in color_versions %}
-                        <div class="color-block-chart" style="background-color: {{color}};" onclick="copyToClipboardColorChart('{{ color }}')"></div>
+                        <div class="color-block-chart" style="background-color: {{color}};"
+                            onclick="copyToClipboardColorChart('{{ color }}')"></div>
                         {% endfor %}
                     </div>
                 </div>
@@ -52,7 +59,8 @@ SnappyURL - A Popular Online URL Shortener
                 <div class="color-chart-section">
                     <div class="color-chart-container">
                         {% for color in material_colors %}
-                        <div class="color-block-chart" style="background-color: {{color}};" onclick="copyToClipboardColorChart('{{ color }}')"></div>
+                        <div class="color-block-chart" style="background-color: {{color}};"
+                            onclick="copyToClipboardColorChart('{{ color }}')"></div>
                         {% endfor %}
                     </div>
                 </div>
@@ -64,7 +72,8 @@ SnappyURL - A Popular Online URL Shortener
                 <div class="color-chart-section">
                     <div class="color-chart-container">
                         {% for color in dark_colors %}
-                        <div class="color-block-chart" style="background-color: {{color}};" onclick="copyToClipboardColorChart('{{ color }}')"></div>
+                        <div class="color-block-chart" style="background-color: {{color}};"
+                            onclick="copyToClipboardColorChart('{{ color }}')"></div>
                         {% endfor %}
                     </div>
                 </div>
@@ -72,8 +81,40 @@ SnappyURL - A Popular Online URL Shortener
 
         </div>
     </div>
-     <!-- Bootstrap Modal -->
-     <div class="modal fade" id="copyModal" tabindex="-1" aria-labelledby="copyModalLabel" aria-hidden="true">
+
+
+    <!-- Web safe color Chart -->
+    <div class="row" style="margin-top: -5%;">
+        <div class="col-md-12">
+            <h1 class="generic-heading text-center">
+                Web Safe Colors Chart
+            </h1>
+        </div>
+        <div class="col-md-12">
+            <div class="web-safe-color-chart py-5 mb-4">
+                <div class="web-safe-color-chart-section">
+                    <div class="web-safe-color-chart-container">
+                        {% for color in web_safe_colors %}
+                        <div class="web-safe-color-block-chart" style="background-color: {{color}};"
+                            onclick="copyToClipboardColorChart('{{ color }}')"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{% url 'web_safe_colors' %}" class="btn mt-3 ms-4" style="color: #1E3E62;font-weight: bold;">View Complete Web-Safe Colors <svg
+                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
+                </svg></a>
+            </div>
+        </div>
+    </div>
+    <!-- Close -->
+
+
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="copyModal" tabindex="-1" aria-labelledby="copyModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
