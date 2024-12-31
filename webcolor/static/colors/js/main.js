@@ -39,7 +39,7 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
     // Code to set a Image on window load
 
     window.onload = function () {
-        const defaultImage = "http://127.0.0.1:8000/static/colors/images/nature.png";
+        const defaultImage = "https://snappycolor.com/static/colors/images/nature.png";
         fetch(defaultImage)
             .then(response => response.blob())
             .then(blob => {
