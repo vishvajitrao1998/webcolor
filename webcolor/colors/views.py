@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import numpy as np
 from .models import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -30,7 +31,6 @@ def home(request):
 
     # Getting all the color categories
     categories = Category.objects.values('id', 'name')
-    print(categories)
     return render(request, 'home.html', {"colors": colors, "categories": categories})
 
 
@@ -71,17 +71,27 @@ def color_palette(request):
     # Getting all the color categories
     categories = Category.objects.values('id', 'name').filter(is_active=True)
     active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True)
-    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes})
 
-def individual_color_palette(request, id):
+    paginator = Paginator(active_palettes, 1)  # Show 20 color palettes per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes, "page_obj": page_obj})
+
+def individual_color_palette(request, name):
     # Getting all the color categories
     categories = Category.objects.values('id', 'name').filter(is_active=True)
-    active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True, id=id)
+    active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True, id=name if '-' in name else None)
     if active_palettes:
         pass
     else:
-        active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True, category__id=id)
-    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes})
+        active_palettes = ColorPalette.objects.filter(is_active=True, category__is_active=True, category__name=name)
+    category = Category.objects.filter(name=name)
+    single_category = None
+    if category:
+        single_category = category[0]
+    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes, 'single_category': single_category})
 
 
 def color_chart(request):
@@ -625,4 +635,12 @@ def web_safe_colors(request):
     # Generate the list
     web_safe_colors = generate_web_safe_colors()
     return render(request, "web_safe_color_chart.html", {"web_safe_colors": web_safe_colors})
+
+
+def contact_us(request):
+    return render(request, "contact.html")
+
+
+def about_us(request):
+    return render(request, "about.html")
 

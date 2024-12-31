@@ -52,6 +52,14 @@ class Color(models.Model):
         return self.hex_code
     
 
+    def hex_to_rgb(self):
+        """
+        Converts the HEX color code to an RGB tuple.
+        """
+        hex_code = self.hex_code.lstrip('#')  # Remove '#' from the start if present
+        return tuple(int(hex_code[i:i+2], 16) for i in (0, 2, 4))  # Convert HEX to RGB
+    
+
     class Meta:
         verbose_name = "Color"
         verbose_name_plural = "Colors"

@@ -22,8 +22,15 @@ SnappyURL - A Popular Online URL Shortener
             <div class="col-md-8 offset-md-2 my-3">
                 <div class="color-palette-header-category">
                     {% for category in categories %}
-                    <a href="{% url 'individual_color_palette' category.id %}"
-                        class="btn category-name">{{category.name}}</a>
+                    <div class="category-name">
+                        <a href="{% url 'individual_category_color_palette' category.name %}"
+                            style="font-size: 15px;">{{category.name}}</a>
+                        {% if category.id == single_category.id %}
+                        <div class="activePalette">
+
+                        </div>
+                        {% endif %}
+                    </div>
                     {% endfor %}
                 </div>
             </div>
@@ -32,7 +39,7 @@ SnappyURL - A Popular Online URL Shortener
         {% if color_palettes|length > 1 %}
         {% for colorPalette in color_palettes %}
         <div class="col-md-4">
-            <div class="color-palettes-container">
+            <div class="color-palettes-container mt-3 mt-lg-0">
                 <div class="d-flex justify-content-center align-items-center">
                     {% for color in colorPalette.colors.all %}
                     <div class="first-color d-flex flex-column justify-content-center align-items-center">
@@ -77,8 +84,7 @@ SnappyURL - A Popular Online URL Shortener
 
                     </div>
                     <div class="color-palette-btn mt-4 ms-3">
-
-                        <a href="{% url 'individual_color_palette' colorPalette.id %}" class="btn"
+                        <a href="{% url 'individual_category_color_palette' colorPalette.id %}" class="btn"
                             style="color: #1E3E62;font-weight: bold;">View Palette <svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -91,10 +97,46 @@ SnappyURL - A Popular Online URL Shortener
             </div>
         </div>
         {% endfor %}
+        <div class="col-md-12 text-center">
+            <!-- Pagination Code Here  -->
+            <div class="pagination pagination-lg justify-content-center my-4">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link shadow-none">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                {% endif %}
+                {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                <li class="page-item" aria-current="page">
+                        <span class=" page-link active-link"> {{ i }}</span>
+                </li>
+                {% else %}
+                <li class="bg-info"><a href="?page={{ i }}" class="active-link page-link shadow-none">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link shadow-none">Next</a>
+                </li>
+
+                {% else %}
+
+                <li class="page-item disabled">
+                    <a class="page-link">Next</a>
+                </li>
+                {% endif %}
+
+            </div>
+        </div>
         {% else %}
         {% for colorPalette in color_palettes %}
-        <div class="col-md-6 offset-md-3">
-            <div class="color-palettes-container">
+        <div class="col-md-8 offset-md-2">
+            <div class="color-palettes-container" style="height: auto; margin-top: 5%">
                 <div class="d-flex justify-content-center align-items-center">
                     {% for color in colorPalette.colors.all %}
                     <div class="first-color d-flex flex-column justify-content-center align-items-center">
@@ -108,6 +150,22 @@ SnappyURL - A Popular Online URL Shortener
                     </div>
                     {% endfor %}
                 </div>
+                <table class="table mt-5 table-bordered table-dark table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Hex Code</th>
+                            <th scope="col">RGB Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for color in colorPalette.colors.all %}
+                        <tr>
+                            <td>{{color.hex_code}}</td>
+                            <td>rgb{{color.hex_to_rgb}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 <div class="d-flex justify-content-start align-items-center mt-4">
                     <div class="color-palette-btn mt-4" style="color: #1E3E62;font-weight: bold;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
@@ -138,17 +196,7 @@ SnappyURL - A Popular Online URL Shortener
                         </svg>
 
                     </div>
-                    <div class="color-palette-btn mt-4 ms-3">
 
-                        <a href="{% url 'individual_color_palette' colorPalette.id %}" class="btn"
-                            style="color: #1E3E62;font-weight: bold;">View Palette <svg
-                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd"
-                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8" />
-                            </svg></a>
-
-                    </div>
                 </div>
             </div>
         </div>

@@ -16,18 +16,20 @@ SnappyURL - A Popular Online URL Shortener
 <div class="container">
     <div class="row">
         <div class="col-md-12 color-chart-heading-section mt-3">
-            <h1 class="generic-heading mt-4 text-center">
-                Web Safe Color Chart
-            </h1>
-            <p class="text-center generic-para">Web safe colors are a specific palette of 216 colors designed to display
-                consistently on computer monitors and web browsers in the early days of the internet when most systems
-                only supported 256 colors.</p>
+            <div class="web-safe-content d-flex-column justify-content-center aligh-item-center">
+                <h1 class="generic-heading mt-4 text-center">
+                    Web Safe Color Chart
+                </h1>
+                <p class="text-center generic-para mx-5">Web safe colors are a specific palette of 216 colors designed to display
+                    consistently on computer monitors and web browsers in the early days of the internet when most systems
+                    only supported 256 colors.</p>
+            </div>
         </div>
     </div>
 </div>
 <div class="container">
     <!-- Web safe color Chart -->
-    <div class="row" style="margin-top: -10%;">
+    <div class="row web-safe-row">
         <div class="col-md-12">
             <div class="web-safe-color-chart py-5 mb-5">
                 <div class="web-safe-color-chart-section">
@@ -39,7 +41,6 @@ SnappyURL - A Popular Online URL Shortener
                             <div class="web-safe-color-code" onclick="copyToClipboardColorChart('{{ color }}')">
                                 {{color}}</div>
                         </div>
-
                         {% endfor %}
                     </div>
                 </div>

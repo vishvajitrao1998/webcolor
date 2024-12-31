@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block titlename %}
-SnappyURL - A Popular Online URL Shortener
+SnappyColor - Unlock Colors, Unleash Creativity
 {% endblock %}
 
 {% block meta_tag %}
-<meta name="title" content="SnappyURL - A Popular Online URL Shortener">
+<meta name="title" content="SnappyColor - Unlock Colors, Unleash Creativity">
 <meta name="keywords"
     content="URL shortener, shorten URLs, link shortener, free URL shortener, create short links, unshorten URL, link tracking, short URL statistics, QR code generator, custom short URLs, URL shortening service, link management, analytics for short links, online URL shortener, shareable links">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.min.js"></script>
@@ -21,9 +21,11 @@ SnappyURL - A Popular Online URL Shortener
             </h1>
             <p class="text-center generic-para">Discover, Extract, Create</p>
         </div>
-        <div class="col-md-8">
-            <div class="image-section">
-                <div class="upload-container" id="upload-container">
+    </div>
+    <div class="row main-img-color-picker">
+        <div class="col-lg-8">
+            <div class="image-main-container">
+                <div class="upload-container py-5 px-2 px-lg-0 mx-auto" id="upload-container">
                     <h2>Drag & Drop Your Image Here</h2>
                     <p>or click on Choose File button</p>
                     <!-- Drag & Drop Zone -->
@@ -32,15 +34,17 @@ SnappyURL - A Popular Online URL Shortener
                         <input type="file" id="fileInput" accept="image/*">
                     </div>
                 </div>
-                <!-- Image preview container -->
-
-                <div id="imagePreview" style="display: none;">
-                    <div id="color-picker"></div> <!-- Custom cursor circle -->
-                    <canvas id="previewImg"> </canvas>
+                <div class="image-section mt-5">
+                    <!-- Image preview container -->
+                    <div id="imagePreview" style="display: none;">
+                        <div id="color-picker" class="mt-5"></div> <!-- Custom cursor circle -->
+                        <canvas id="previewImg" class="mt-5"> </canvas>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4">
             <div class="color-codes">
                 <div class="color-header">
                     <div class="color1"></div>
@@ -96,13 +100,10 @@ SnappyURL - A Popular Online URL Shortener
                 </div>
             </div>
         </div>
-
-
-
     </div>
 
-    <div class="row">
-        <div class="col-md-10 offset-md-1 mt-2">
+    <div class="row img-color-palette-row">
+        <div class="col-md-10 offset-md-1">
             <div class="color-palette-section mb-5 text-center py-4">
                 <div class="colors-group">
                     <img src="{% static 'colors/images/colors.svg' %}" alt="" class="d-none d-md-block">
@@ -115,22 +116,7 @@ SnappyURL - A Popular Online URL Shortener
                 <h2 class="text-center mt-3">Color Palette from Image</h2>
                 <p class="text-center">Browse through this collection of modern colors extracted from your image.</p>
                 <div class="color-palette mt-3" id="color-palette">
-                    <!-- Color Block 1 -->
-                    <div class="color-block color-1"></div>
-                    <!-- Color Block 2 -->
-                    <div class="color-block color-2"></div>
-                    <!-- Color Block 3 -->
-                    <div class="color-block color-3"></div>
-                    <!-- Color Block 4 -->
-                    <div class="color-block color-4"></div>
-                    <!-- Color Block 5 -->
-                    <div class="color-block color-5"></div>
-                    <!-- Color Block 6 -->
-                    <div class="color-block color-6"></div>
-                    <!-- Color Block 7 -->
-                    <div class="color-block color-7"></div>
-                    <!-- Color Block 8 -->
-                    <div class="color-block color-8"></div>
+                    
                 </div>
             </div>
 
@@ -175,12 +161,12 @@ SnappyURL - A Popular Online URL Shortener
 
                 <div class="color-palette-category mt-5">
                     {% for category in categories %}
-                    <a href="/{{category.id}}" class="btn category-name dark">{{category.name}}</a>
+                    <a href="{% url 'individual_category_color_palette' category.name %}" class="btn category-name dark">{{category.name}}</a>
                     {% endfor %}
 
                 </div>
 
-                <a href="/color-palettes" class="glow-button text-center">Get All Palettes <svg
+                <a href="{% url 'color_palette' %}" class="glow-button text-center">Get All Palettes <svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -188,8 +174,6 @@ SnappyURL - A Popular Online URL Shortener
                     </svg></a>
             </div>
         </div>
-
-
         <div class="col-md-6 my-5">
             <div class="hextorgb-container">
                 <div class="hextorgb-content">

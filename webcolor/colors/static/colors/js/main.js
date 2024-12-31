@@ -7,8 +7,9 @@ const imagePreview = document.getElementById('imagePreview');
 const canvas = document.getElementById('previewImg');
 let colorPickerCircle = document.getElementById('color-picker');
 let isColorPickerActive = false;
+let uploadedFile = null; // Store the uploaded file globally
 
-if (document.getElementById('colorPickerBtn')){
+if (document.getElementById('colorPickerBtn')) {
     document.getElementById('colorPickerBtn').addEventListener('click', activateColorPicker);
 }
 
@@ -37,22 +38,23 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
 
     // Code to set a Image on window load
 
-    window.onload = function (){
+    window.onload = function () {
         const defaultImage = "http://127.0.0.1:8000/static/colors/images/nature.png";
         fetch(defaultImage)
-        .then(response => response.blob())
-        .then(blob => {
-            const defaultFile = new File([blob], 'default-image.jpg', { type: blob.type });
-            displayImage(defaultFile); // Process the file as if it were uploaded
-        })
-        .catch(error => console.error('Error loading default image:', error));
+            .then(response => response.blob())
+            .then(blob => {
+                const defaultFile = new File([blob], 'default-image.jpg', { type: blob.type });
+                displayImage(defaultFile); // Process the file as if it were uploaded
+            })
+            .catch(error => console.error('Error loading default image:', error));
     }
+
+    // const preLoadedImage = 
     // Close
 
     // Handle file input selection
     fileInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
-        console.log(file)
         if (file && file.type.startsWith('image')) {
             displayImage(file);
         }
@@ -60,6 +62,7 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
 
     // Display image preview
     function displayImage(file) {
+        uploadedFile = file;
         const reader = new FileReader();
         reader.onload = function (e) {
             // Load the image into a canvas for processing
@@ -67,17 +70,17 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
             // Using color thief
             const colorThief = new ColorThief();
             // Hide the upload container and show the preview
-            uploadContainer.style.display = 'none';
+            // uploadContainer.style.display = 'none';
             img.src = e.target.result;
             imagePreview.style.display = 'block';
             img.onload = function () {
                 const ctx = canvas.getContext('2d');
                 const containerWidth = canvas.parentElement.offsetWidth; // Get parent width
-                const containerHeight = Math.min(550, img.height * (containerWidth / img.width));  // Adjust the height to maintain aspect ratio
+                const containerHeight = Math.min(650, img.height * (containerWidth / img.width));  // Adjust the height to maintain aspect ratio
                 // Set the canvas width and height based on the container size
                 canvas.width = containerWidth;
                 canvas.height = containerHeight;
-            
+
                 // Draw the image on the canvas, scaling it to fit
                 ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
 
@@ -90,6 +93,48 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
         reader.readAsDataURL(file);
     }
 
+
+    // Code to resize image based on the window width and height
+    const resizeCanvas = () => {
+        if (uploadedFile) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Load the image into a canvas for processing
+                const img = new Image();
+                // Using color thief
+                const colorThief = new ColorThief();
+                // Hide the upload container and show the preview
+                // uploadContainer.style.display = 'none';
+                img.src = e.target.result;
+                imagePreview.style.display = 'block';
+                img.onload = function () {
+                    const ctx = canvas.getContext('2d');
+                    const containerWidth = canvas.parentElement.offsetWidth; // Get parent width
+
+                    const containerHeight = Math.min(550, img.height * (containerWidth / img.width));  // Adjust the height to maintain aspect ratio
+                    // Set the canvas width and height based on the container size
+                    canvas.width = containerWidth;
+                    canvas.height = containerHeight;
+
+                    // Draw the image on the canvas, scaling it to fit
+                    ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+
+                    // Getting color palette
+                    const palette = colorThief.getPalette(canvas, 8);  // Get 8 dominant colors
+                    displayColorPalette(palette);
+                };
+                // img.src = e.target.result;
+            };
+            reader.readAsDataURL(uploadedFile);
+        }
+
+    };
+
+    // Handle window resize
+    window.addEventListener('resize', resizeCanvas);
+    // Close
+
+    // Code to display color palette
     function displayColorPalette(colors) {
         const paletteContainer = document.getElementById('color-palette');
         paletteContainer.innerHTML = ''; // Clear previous palette
@@ -132,8 +177,7 @@ function activateColorPicker() {
 }
 
 // ============ Code to update color preview only ===============
-if (canvas)
-{
+if (canvas) {
     canvas.addEventListener('mousemove', function (e) {
         if (isColorPickerActive) {
             const rect = canvas.getBoundingClientRect();
@@ -143,7 +187,7 @@ if (canvas)
             // Get pixel data at mouse position
             const pixel = ctx.getImageData(x, y, 1, 1).data;
             const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-    
+
             // Update color picker position and background color
             colorPickerCircle.style.left = `${x - 20}px`;
             colorPickerCircle.style.top = `${y - 20}px`;
@@ -153,12 +197,11 @@ if (canvas)
             colorPreview.style.background = color;
         }
     });
-    
+
 }
 
 // ============ Code to update Hex value and RGB Value ==================
-if (canvas)
-{
+if (canvas) {
     canvas.addEventListener('click', function (e) {
         if (isColorPickerActive) {
             const rect = canvas.getBoundingClientRect();
@@ -168,13 +211,13 @@ if (canvas)
             // Get pixel data at mouse position
             const pixel = ctx.getImageData(x, y, 1, 1).data;
             const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-    
+
             // Update color picker position and background color
             colorPickerCircle.style.left = `${x - 20}px`;
             colorPickerCircle.style.top = `${y - 20}px`;
             colorPickerCircle.style.backgroundColor = color;
             colorPickerCircle.style.display = 'block';  // Show color picker circle
-    
+
             let rgbValue = document.getElementById("rgb-code");
             let hexValue = document.getElementById("hex-code");
             let colorPreview = document.getElementById("color-preview");
@@ -183,12 +226,11 @@ if (canvas)
             hexValue.textContent = rgbToHex(pixel[0], pixel[1], pixel[2]);
         }
     });
-    
+
 }
 
 // Hide color picker when mouse leaves the image
-if (uploadContainer)
-{
+if (uploadContainer) {
     uploadContainer.addEventListener('mouseleave', function () {
         if (isColorPickerActive) {
             colorPickerCircle.style.display = 'none';  // Hide color picker circle when leaving the image
@@ -351,7 +393,7 @@ function resetHexValues() {
 // Code for copy to clipboard
 function copyToClipboardColorPalette(value) {
     // Use the Clipboard API to copy the text to the clipboard
-    if( value.length <= 7){
+    if (value.length <= 7) {
         navigator.clipboard.writeText(value);
         showModal("The color code has been successfully copied to your clipboard!")
     }
@@ -361,20 +403,20 @@ function copyToClipboardColorPalette(value) {
         navigator.clipboard.writeText(paletteLink);
         showModal("Color palette link has been copied, Share it!")
     }
-   
+
 };
 
 
 function copyToClipboardColorChart(value) {
     // Use the Clipboard API to copy the text to the clipboard
-    if( value.length <= 7){
+    if (value.length <= 7) {
         navigator.clipboard.writeText(value);
         showModal(`<p>The color code <strong>${value} </strong> has been copied!</p>`)
     }
     else {
         showModal("Color palette link has been copied, Share it!")
     }
-   
+
 };
 // close
 
