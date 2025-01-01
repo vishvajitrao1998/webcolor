@@ -395,7 +395,7 @@ function copyToClipboardColorPalette(value) {
     // Use the Clipboard API to copy the text to the clipboard
     if (value.length <= 7) {
         navigator.clipboard.writeText(value);
-        showModal("The color code has been successfully copied to your clipboard!")
+        showModal(`<p>The color code <strong>${value} </strong> has been copied!</p>`)
     }
 
     else {

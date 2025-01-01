@@ -24,3 +24,7 @@ class ColorAdmin(admin.ModelAdmin):
     list_display = ('name', 'hex_code', 'palette')
 
 
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'email')
+

@@ -37,8 +37,7 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
     });
 
     // Code to set a Image on window load
-
-    window.onload = function () {
+    function loadDefaultImage() {
         const defaultImage = "https://snappycolor.com/static/colors/images/nature.png";
         fetch(defaultImage)
             .then(response => response.blob())
@@ -48,6 +47,8 @@ if (uploadZone && uploadContainer && fileInput && fileInput && imagePreview && p
             })
             .catch(error => console.error('Error loading default image:', error));
     }
+
+    loadDefaultImage()
 
     // const preLoadedImage = 
     // Close

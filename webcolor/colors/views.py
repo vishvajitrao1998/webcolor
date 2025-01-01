@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import numpy as np
 from .models import *
 from django.core.paginator import Paginator
@@ -91,7 +91,14 @@ def individual_color_palette(request, name):
     single_category = None
     if category:
         single_category = category[0]
-    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes, 'single_category': single_category})
+
+
+    paginator = Paginator(active_palettes, 1)  # Show 20 color palettes per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'color-palettes.html', {'categories': categories, 'color_palettes': active_palettes, 'single_category': single_category, "page_obj": page_obj})
 
 
 def color_chart(request):
@@ -638,7 +645,22 @@ def web_safe_colors(request):
 
 
 def contact_us(request):
-    return render(request, "contact.html")
+    flag = False
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        country = request.POST.get("country")
+        comment = request.POST.get("comment")
+        contact_rectord = Contact(
+            name=name,
+            email=email,
+            country=country,
+            comment=comment
+        )
+        contact_rectord.save()
+        flag = True
+        return render(request, "contact.html", {"flag": flag})
+    return render(request, "contact.html", {"flag": flag})
 
 
 def about_us(request):
